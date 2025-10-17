@@ -25,3 +25,5 @@ EXPOSE 3000
 
 # デフォルトコマンド
 CMD ["rails", "server", "-b", "0.0.0.0"]
+
+ENV NODE_OPTIONS=--openssl-legacy-provider
