@@ -1,0 +1,92 @@
+@use '~bootstrap/scss/bootstrap';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+footer {
+  background-color: #93b3ca;
+}
+
+.profile_icon {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.icon{
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.text-wrap {
+  word-wrap: break-word;
+}
+
+table td {
+  word-break : break-all;
+}
+
+.flame-border{
+  border: solid;
+  border-radius: 8px;
+  border-color: #93b3ca;
+}
+
+.search-btn{
+  text-align: center;
+  color: #fff;
+  background: #93b3ca;
+  border: 2px solid #93b3ca;
+  border-radius: 100vh;
+  text-decoration: none;
+}
+
+.header-btn{
+  display: block;
+  text-align: center;
+  vertical-align: text-top;
+  text-decoration: none;
+  color: black;
+}
+
+.header-btn-fill{
+  display: block;
+  text-align: center;
+  vertical-align: text-top;
+  color: #fff;
+  background: #93b3ca;
+  border: 2px solid #93b3ca;
+  border-radius: 100vh;
+  text-decoration: none;
+  padding: 4px 0px 4px 0px;
+}
+
+.text-area{
+  width: 100%;
+}
+
+.submit-btn{
+  color: #fff;
+  float: right;
+}
+
+.label {
+  background-color: #337ab7;
+  font-weight: 500;
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}

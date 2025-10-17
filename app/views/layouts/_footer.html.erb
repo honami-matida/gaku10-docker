@@ -1,0 +1,15 @@
+<footer class="footer">
+
+  <div class="container">
+    <div class="row my-5">
+      <div class="col">
+        <p class="text-muted">Place sticky footer content here.</p>
+        <% unless admin_signed_in? %>
+          <div><%= link_to "利用規約", public_static_pages_terms_path, class: "text-muted" %></div>
+        <% else %>
+          <div><%= link_to "利用規約", admin_static_pages_terms_path, class: "text-muted" %></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</footer>

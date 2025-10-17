@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row py-3 mt-5">
+    <div class="px-5 px-sm-0 mx-auto">
+      <div class="mx-auto">
+        <h2 class="text-center">ログイン</h2>
+      </div>
+
+      <div class="py-3 text-center">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="field">
+            <%= f.label :email, "メールアドレス" %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :password, "パスワード" %><br />
+            <%= f.password_field :password, autocomplete: "current-password" %>
+          </div>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="field">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me, "ログイン記憶を保持する" %>
+            </div>
+          <% end %>
+
+          <div class="actions">
+            <%= f.submit "ログイン", class: 'btn btn-info' %>
+          </div>
+        <% end %>
+
+        <%= render "public/shared/links" %>
+      </div>
+
+    </div>
+  </div>
+</div>

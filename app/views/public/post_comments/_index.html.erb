@@ -1,0 +1,22 @@
+<p>コメント件数：<%= @post.post_comments.count %></p>
+<% @post_comments.each do |post_comment| %>
+  <div class="row">
+    <div class="co-2 my-3 p-3">
+      <%= link_to public_customer_path(post_comment.customer), style:"text-decoration: none;" do %>
+        <%= image_tag post_comment.customer.get_profile_image(50,50), class:"icon" %>
+      <% end %>
+    </div>
+    <div class="col-10 my-3 p-3", style="background: #EBF1F5; border-radius: 8px;" >
+
+      <div>
+        <%= post_comment.customer.name %>
+        <p class="text-wrap"><%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
+        <p class="text-wrap border-bottom py-3"><%= post_comment.comment %></p>
+
+        <% if post_comment.customer == current_customer %>
+         <%= link_to "削除", public_post_post_comment_path(@post, post_comment), method: :delete, class: "btn btn-danger", remote: true %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

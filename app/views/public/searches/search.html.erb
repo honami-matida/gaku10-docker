@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row py-3 mt-5">
+
+    <% if @records.present? %>
+      <% if @model == 'customer' %>
+        <h3>会員検索結果 "<%= @word %>"</h3>
+        <table class="table table-hover table-inverse">
+          <thead>
+            <tr>
+              <th>アイコン</th>
+              <th>名前</th>
+              <th>紹介文</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @records.each do |customer| %>
+              <tr>
+                <td>
+                  <%= link_to profile_public_customer_path(customer) do %>
+                    <%= image_tag customer.get_profile_image(50,50), class:"icon" %>
+                  <% end %>
+                </td>
+                <td><%= link_to customer.name, profile_public_customer_path(customer) %></td>
+                <td><%= truncate(customer.introduction, length: 30) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <div class="mx-auto">
+          <%= paginate @records, theme: 'bootstrap-5', class:"text-center" %>
+        </div>
+
+      <% elsif @model == 'post' %>
+        <h3>投稿検索結果 "<%= @word %>"</h3>
+        <table class="table table-hover table-inverse">
+          <thead>
+            <tr>
+              <th></th>
+              <th>タイトル</th>
+              <th>ジャンル</th>
+              <th>アイコン</th>
+              <th>投稿者</th>
+              <th>投稿日時</th>
+              <th></th>
+              <th>コメント数</th>
+              <th>いいね数</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @records.each do |post| %>
+              <tr>
+                <td></td>
+                <td><%= link_to truncate(post.title, length: 30), public_post_path(post) %></td>
+                <td><%= post.genre.name %></td>
+                <td><%= image_tag post.customer.get_profile_image(50,50), class:"icon" %></td>
+                <td><%= truncate(post.customer.name, length: 15) %></td>
+                <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
+                <td><%#= render "favorites/btn", book: book %></td>
+                <td>
+                  <i class="fa-regular fa-comment-dots" style="color: #7d7d7d"></i>
+                  <%= post.post_comments.count %>
+                </td>
+                <td>
+                  <i class="fa-regular fa-heart" style="color: #7d7d7d"></i>
+                  <%= post.favorites.count %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <div class="mx-auto">
+          <%= paginate @records, theme: 'bootstrap-5', class:"text-center" %>
+        </div>
+
+      <% else %>
+        <p>検索結果がありません。</p>
+      <% end %>
+
+    <% end %>
+  </div>
+</div>

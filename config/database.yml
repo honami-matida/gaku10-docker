@@ -1,0 +1,29 @@
+# SQLite. Versions 3.8.0 and up are supported.
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
+#
+default: &default
+  adapter: mysql2 #変更
+  encoding: utf8mb4 #追記
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV['MYSQL_USER'] %> #追記
+  password: <%= ENV['MYSQL_PASSWORD'] %> #追記
+  host: <%= ENV['MYSQL_HOST'] %> #追記
+  database: <%= ENV['MYSQL_DATABASE'] %> #追記
+  timeout: 5000
+
+development:
+  <<: *default
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: gaku10_test  # テスト用DB名
+
+production:
+  <<: *default
+  database: <%= ENV['DB_DATABASE'] %>

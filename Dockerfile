@@ -14,7 +14,7 @@ RUN apt-get update -qq && apt-get install -y \
 WORKDIR /app
 
 # ローカルの Rails アプリをコンテナにコピー
-COPY gaku10/ /app
+COPY . /app
 
 # Gem をインストール
 RUN gem install bundler -v 2.4.19

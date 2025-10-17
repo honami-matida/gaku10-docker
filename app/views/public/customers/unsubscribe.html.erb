@@ -1,0 +1,29 @@
+<div class="text-center h3 mb-5 py-3">
+  退会確認
+</div>
+
+<div class="container">
+  <div class="row py-3 mt-5">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+
+      <div class="text-center">
+        <h3 class=""><span>本当に退会しますか？</span></h3>
+        <p class="">
+          退会すると、会員登録情報や<br>
+          これまでの投稿が閲覧できなくなります。<br>
+          退会する場合は、「退会する」をクリックしてください。
+        </p>
+      </div>
+
+      <div class="row py-3 text-center">
+        <div class="col">
+          <%= link_to "退会しない", profile_public_customer_path, :class => "btn btn-primary" %>
+        </div>
+        <div class="col">
+          <%= link_to "退会する", withdraw_public_customer_path, method: :patch, :class => "btn btn-danger", data: { confirm: "本当に退会しますか？" }  %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

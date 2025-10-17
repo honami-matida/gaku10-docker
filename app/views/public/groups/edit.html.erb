@@ -1,0 +1,28 @@
+<div class='container'>
+  <div class='row mt-5'>
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h3 class="text-center">グループ編集</h3>
+      <%= form_with model: @group, url: public_group_path, local: true do |f| %>
+        <div class="form-group">
+          <%= f.label :グループ名 %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :紹介文 %>
+          <%= f.text_area :introduction, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :グループ画像 %>
+          <%= f.file_field :group_image, class: "form-control-file" , accept: "image/*" %>
+        </div>
+
+        <div class="form-group text-center">
+          <%= f.submit "編集内容を保存", class: 'btn btn-info' %>
+          <%= link_to "グループを削除", public_group_path(@group.id), method: :delete, class:"btn btn-danger ml-3" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

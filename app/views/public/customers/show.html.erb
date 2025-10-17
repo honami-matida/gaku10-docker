@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="row py-5">
+    <div class="col-5">
+      <div class ="row flame-border">
+        <div class="col">
+
+        <div class="row d-flex align-items-center">
+          <div class="col">
+            <h3 class="mt-5">マイページ</h3>
+          </div>
+        </div>
+        <div class="container-fluid my-5 flame-border">
+          <div class="row py-5">
+            <div class="col">
+              <div class="row">
+                <%= image_tag @customer.get_profile_image(150,150), class:"profile_icon d-block mx-auto" %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row h3">
+          <div class="col ml-3 text-wrap", style="font-family:Hiragino Sans;">
+            <%= @customer.name %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col py-5 ml-3 text-wrap">
+            <%= @customer.introduction %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <table class="table table-bordered">
+              <tr>
+                <td class="bg-light">名前</td>
+                <td><%= @customer.name %></td>
+              </tr>
+              <tr>
+                <td class="bg-light">メールアドレス</td>
+                <td><%= @customer.email %></td>
+              </tr>
+              <tr>
+                <td class="bg-light">自己紹介文</td>
+                <td><%= @customer.introduction %></td>
+              </tr>
+              <tr>
+                <td class="bg-light">コメント</td>
+                <td><%= "#{@customer.post_comments.count} コメント" %></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="row mb-5">
+          <% if customer_signed_in? && current_customer.id == @customer.id %>
+            <%= link_to "編集する", profile_edit_public_customer_path, class:"btn btn-info d-block mx-auto" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    </div>
+    <div class="col-6 offset-1">
+      <div class="row">
+        <h3 class="my-5">会員の投稿一覧</h3>
+      </div>
+      <% @posts.each do |post| %>
+        <div class="row border-top">
+          <div class="col ml-3">
+            <div class="row">
+              <p><%= post.created_at.strftime('%m/%d %H:%M') %></p>
+            </div>
+
+            <div class="row">
+              <p>タイトル:　<%= link_to post.title, public_post_path(post) %></p>
+            </div>
+
+             <div class="row">
+              <p style=" word-break : break-all;"><%= truncate(post.introduction, length: 60) %></p>
+            </div>
+
+            <div class="row py-3 float-right">
+              <div class="col px-5 text-nowrap"><%= post.genre.name %></div>
+              <%#= render "favorites/btn", book: book %>
+              <div class="col text-nowrap">
+                <i class="fa-regular fa-comment-dots" style="color: #7d7d7d"></i>
+                <%= post.post_comments.count %>
+              </div>
+              <div class="col text-nowrap">
+                <i class="fa-regular fa-heart" style="color: #7d7d7d"></i>
+                <%= post.favorites.count %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="row mx-auto">
+        <%= paginate @posts, theme: 'bootstrap-5' %>
+      </div>
+
+    </div>
+  </div>
+</div>

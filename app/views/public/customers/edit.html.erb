@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <h4 class="my-5">会員情報編集</h4>
+    <table class="table table-borderless">
+      <%= form_with model: @customer, url: profile_public_customer_path(@customer), method: :patch do |f| %>
+        <tr>
+          <td class="text-nowrap">アイコン画像</td>
+          <td><%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %></td>
+        </tr>
+        <tr>
+          <td class="text-nowrap">名前</td>
+          <td><%= f.text_field :name %></td>
+        </tr>
+        <tr>
+          <td class="text-nowrap">メールアドレス</td>
+          <td><%= f.text_field :email %></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="text-nowrap">自己紹介文</td>
+          <td class="text-area"><%= f.text_area :introduction, rows:'5', cols:'40' %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <% unless @customer.guest_customer? %>
+            <td>
+              <%= f.submit "編集内容を保存", class:"btn btn-info" %>
+              <%= link_to "退会する", unsubscribe_public_customer_path, class:"btn btn-danger ml-3" %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

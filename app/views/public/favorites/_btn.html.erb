@@ -1,0 +1,13 @@
+<% unless current_customer.guest_customer? %>
+  <% if @post.favorited_by?(current_customer) %>
+    <!--# 一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
+    <%= link_to public_post_favorites_path(@post), method: :delete, remote: true do %>
+      <span style="color:red;">いいね︎️︎♥︎</span>
+    <% end %>
+  <% else %>
+    <!--# 一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
+    <%= link_to public_post_favorites_path(@post), method: :post, remote: true do %>
+      <span style="color:black;">いいね︎♡</span>
+    <% end %>
+  <% end %>
+<% end %>

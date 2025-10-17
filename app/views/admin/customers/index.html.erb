@@ -1,0 +1,47 @@
+<div class="text-center h3 mb-5 py-3">
+  会員一覧
+</div>
+
+<div class="container">
+  <div class="row py-3 mt-5">
+
+    <table class="table table-hover table-inverse">
+      <thead>
+        <tr>
+          <th>アイコン</th>
+          <th>名前</th>
+          <th>紹介文</th>
+          <th>会員ステータス</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @customers.each do |customer| %>
+          <% unless customer.guest_customer? %>
+            <tr>
+              <td>
+                <%= link_to admin_customer_path(customer) do %>
+                  <%= image_tag customer.get_profile_image(50,50), class:"icon" %>
+                <% end %>
+              </td>
+              <td><%= link_to customer.name, admin_customer_path(customer) %></td>
+              <td><%= truncate(customer.introduction, length: 60) %></td>
+              <td>
+                <% if customer.is_active %>
+                  <span class = "text-success">有効</span>
+                <% else %>
+                  <span class = "text-secondary">退会</span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+       </tbody>
+     </table>
+
+    <div class="row mx-auto my-5">
+      <%= paginate @customers, theme: 'bootstrap-5' %>
+    </div>
+
+  </div>
+</div>

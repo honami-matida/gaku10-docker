@@ -1,0 +1,130 @@
+<header class="shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-light">
+
+            <% if customer_signed_in? %>
+              <%= link_to public_posts_path, class:"navbar-brand p-3" do %>
+              <%= image_tag "logo.png", size:'200x80'%>
+              <%= image_tag "logo2.png", size:'80x80'%>
+              <% end %>
+            <% elsif admin_signed_in? %>
+              <%= link_to admin_root_path, class:"navbar-brand p-3" do %>
+              <%= image_tag "logo.png", size:'200x80'%>
+              <% end %>
+            <% else %>
+              <%= link_to root_path, class:"navbar-brand p-3" do %>
+              <%= image_tag "logo.png", size:'200x80'%>
+              <% end %>
+            <% end %>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto d-flex align-items-center">
+            <% if customer_signed_in? %>
+
+            <!--会員がログインしている時 -->
+              <div class="search_form">
+                  <%= form_with url: public_search_path, local: true, method: :get do |f| %>
+                    <%= f.text_field :word %>
+                    <%= f.select :model, options_for_select([['customer'], ['post']]) %>
+                    <%= button_tag type: "submit", class: "search-btn", style:"width: 50px;" do %>
+                      <i class="fas fa-search"></i>
+                    <% end %>
+                  <% end %>
+              </div>
+              <li class="nav-item mx-2 ">
+                <%= link_to  destroy_customer_session_path, class: "header-btn",style:"width: 50px;", method: :delete do %>
+                  <i class="fa-solid fa-arrow-right-from-bracket "></i>
+                <% end %>
+              </li>
+              <li class="nav-item font-weight-bold mx-2 small">
+                <%= truncate(current_customer.name, length: 9) %>
+              </li>
+              <li class="nav-item mx-2">
+                <%= link_to public_customer_path(current_customer) do %>
+                  <%= image_tag current_customer.get_profile_image(50,50), class:"icon" %>
+                <% end %>
+              </li>
+              <% unless current_customer.guest_customer? %>
+                <li class="nav-item mx-2" >
+                  <%= link_to "投稿する", new_public_post_path, class: "header-btn-fill", style:"width: 80px; text-decoration: none;" %>
+                </li>
+              <% end %>
+            <% elsif admin_signed_in? %>
+              <!-- 管理者がログインしている時 -->
+              <li class="nav-item me-auto p-2">
+                管理者画面です
+              </li>
+              <li class="nav-item ">
+                <%= link_to destroy_admin_session_path, class: "header-btn" , method: :delete do %>
+                  <i class="fa-solid fa-arrow-right-from-bracket "></i>
+                <% end %>
+              </li>
+            <% else %>
+              <!-- ログインしていない時 -->
+              <li class="nav-item mx-2">
+                <%= link_to "新規登録", new_customer_registration_path, class: "header-btn-fill",style:"width: 100px; text-decoration: none;" %>
+              </li>
+              <li class="nav-item mx-2">
+                <%= link_to "ログイン", new_customer_session_path, class: "header-btn-fill",style:"width: 100px; text-decoration: none;" %>
+              </li>
+            <% end %>
+          </ul>
+          <%#= form_with class: 'd-flex' do |f| %>
+            <%#= f.text_field :content, placeholder: "検索..." %>
+            <%#= f.submit '検索', class: 'ml-1 btn btn-outline-warning flex-shrink-0' %>
+          <%# end %>
+
+        </div>
+      </div>
+  </nav>
+
+  <nav class="navbar navbar-light bg-light">
+    <div class="container">
+      <div class="mx-auto">
+          <ul class="mb-0 d-flex align-items-center list-unstyled text-nowrap">
+            <% if customer_signed_in? %>
+
+            <!--会員がログインしている時 -->
+              <li class="navbar-brand pr-4 border-right" >
+                <%= link_to "会員一覧", list_public_customers_path, class: "text-dark" %>
+              </li>
+              <li class="navbar-brand pr-4 border-right" >
+                <%= link_to "グループ一覧", public_groups_path, class: "text-dark" %>
+              </li>
+              <li class="navbar-brand pr-4 border-right">
+                <%= link_to "ジャンル一覧", public_genres_path, class: "text-dark" %>
+              </li>
+              <li class="navbar-brand pr-4 border-right">
+                <%= link_to "About", about_path, class: "text-dark" %>
+              </li>
+              <li class="navbar-brand pr-4 border-right">
+                <%= link_to "いいね一覧", favorites_public_customer_path(current_customer.id), class: "text-dark" %>
+              </li>
+            <% elsif admin_signed_in? %>
+              <!-- 管理者がログインしている時 -->
+              <li class="navbar-brand pr-4 border-right">
+                <%= link_to "会員一覧", admin_customers_path, class: "text-dark" %>
+              </li>
+              <li class="navbar-brand pr-4 border-right">
+                <%= link_to "グループ一覧", admin_groups_path, class: "text-dark" %>
+              </li>
+              <li class="navbar-brand pr-4 border-right">
+                <%= link_to "ジャンル一覧", admin_genres_path, class: "text-dark" %>
+              </li>
+              <li class="navbar-brand pr-4 border-right">
+                <%= link_to "コメント一覧", admin_post_comments_path, class: "text-dark" %>
+              </li>
+            <% else %>
+              <!-- ログインしていない時 -->
+              <li class="navbar-brand pr-4">
+                <%= link_to "About", about_path, class: "text-dark"  %>
+              </li>
+            <% end %>
+          </ul>
+         </div>
+    </div>
+  </nav>
+</header>

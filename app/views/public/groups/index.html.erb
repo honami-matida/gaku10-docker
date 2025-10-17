@@ -1,0 +1,44 @@
+<h3 class="py-3 mb-5 text-center">グループ一覧</h3>
+
+<div class="container">
+  <div class="row py-3">
+
+    <table class='table'>
+      <thead>
+        <tr>
+          <th></th>
+          <th>グループ名</th>
+          <th>紹介文</th>
+          <th>オーナー</th>
+          <th>オーナー名</th>
+          <th>参加人数</th>
+          <th></th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @groups.each do |group| %>
+          <tr>
+            <td>
+              <%= image_tag group.get_group_image(50,50), class:"icon" %>
+            </td>
+            <td><%= link_to group.name,public_group_path(group) %></td>
+            <td><%= truncate(group.introduction, length: 30) %></td>
+            <td><%= image_tag group.owner.get_profile_image(50,50), class:"icon" %></td>
+            <td><%= truncate(group.owner.name, length: 15) %></td>
+            <td><%= group.group_requests.approved.count %>人</td>
+            <% if group.owner.id == current_customer.id %>
+              <td><%= link_to '編集', edit_public_group_path(group), class: "group_#{group.id} btn btn-sm btn-info text-nowrap" %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="mx-auto">
+      <%= paginate @groups, theme: 'bootstrap-5', class:"text-center" %>
+    </div>
+
+  </div>
+</div>

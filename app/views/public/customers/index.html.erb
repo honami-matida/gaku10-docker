@@ -1,0 +1,46 @@
+<div class="text-center h3 mb-5 py-3">
+  会員一覧
+</div>
+
+<div class="container">
+  <div class="row py-3 mb-5">
+
+    <div class="col">
+      <div class="row justify-content-end">
+        <%=link_to "グループを作成する",new_public_group_path %> |
+        <%=link_to "グループ一覧",public_groups_path %>
+      </div>
+    </div>
+
+    <table class="table table-hover table-inverse">
+      <thead>
+        <tr>
+          <th>アイコン</th>
+          <th>名前</th>
+          <th>紹介文</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @customers.each do |customer| %>
+          <% unless customer.guest_customer? %>
+          <tr>
+            <td>
+              <%= link_to public_customer_path(customer), style:"text-decoration: none;" do %>
+                <%= image_tag customer.get_profile_image(50,50), class:"icon" %>
+              <% end %>
+            </td>
+            <td><%= link_to customer.name, public_customer_path(customer) %></td>
+            <td><%= truncate(customer.introduction, length: 30) %></td>
+          </tr>
+        <% end %>
+       <% end %>
+      </tbody>
+    </table>
+
+    <div class="mx-auto">
+      <%= paginate @customers, theme: 'bootstrap-5', class:"text-center" %>
+    </div>
+
+  </div>
+</div>

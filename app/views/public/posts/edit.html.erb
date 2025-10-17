@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h4 class="my-5">投稿編集</h4>
+      <table class="table table-borderless">
+        <%= form_with model: @post, url: public_post_path, method: :patch do |f| %>
+          <tr>
+            <td class="text-nowrap">タイトル</td>
+            <td><%= f.text_field :title %></td>
+          </tr>
+          <tr>
+            <td class="text-nowrap">本文</td>
+            <td class="text-area"><%= f.text_area :introduction, rows:'5', cols:'40' %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="text-nowrap">ジャンル</td>
+            <td><%= f.collection_select :genre_id, Genre.all, :id, :name %></td>
+          </tr>
+          <tr>
+            <td>
+              <%= f.label :画像 %>
+            </td>
+            <td>
+              <%= f.file_field :images, multiple: true, accept: "image/*" %>
+
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <%= f.submit "編集内容を保存", class:"btn btn-info" %>
+              <% if @post.customer == current_customer %>
+                <%= link_to "削除する", public_post_path(@post), method: :delete, class:"btn btn-danger offset-1" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

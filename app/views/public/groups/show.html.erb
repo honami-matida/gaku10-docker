@@ -1,0 +1,207 @@
+<div class="text-center h3 mb-5 py-3">
+  グループ詳細
+</div>
+
+<div class='container'>
+  <div class='row my-5'>
+    <div class='col'>
+      <div class='row'>
+        <div class="mx-auto">
+          <table class='table table-hover table-inverse'>
+            <thead>
+              <tr>
+                <th></th>
+                <th>グループ名</th>
+                <th>紹介文</th>
+                <th colspan="2"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <%= image_tag @group.get_group_image(50,50), class:"icon" %>
+                </td>
+                </td>
+                <td><%= @group.name %></td>
+                <td><%= @group.introduction %></td>
+
+                  <% if @group.owner_id == current_customer.id %>
+                    <td class="text-nowrap"><%= link_to '編集', edit_public_group_path(@group), class: "btn btn-info" %></td>
+                    <td class="text-nowrap"><%= link_to "削除", public_group_path(@group), method: :delete, class:"btn btn-danger offset-1" %></td>
+                  <% elsif current_customer.guest_customer? %>
+                    <td class="text-nowrap"><%= link_to "ログインへ(About)", destroy_customer_session_path, method: :delete, class:"btn btn-outline-info offset-1" %></td>
+                  <% else %>
+
+                  <!--申請ボタン-->
+                    <% if @group_request.nil? %>
+                      <td><%= button_to 'グループに申請', public_group_group_requests_path(@group), method: :post, class: "btn btn-info" %></td>
+                    <% elsif @group_request.pending? %>
+                      <td class="text-nowrap">申請中です</td>
+                    <% elsif @group_request.approved? %>
+                        <td class="text-nowrap">グループのメンバーです</td>
+                        <td><%= link_to 'グループから退会', public_group_group_request_path(@group), method: :delete, data: { confirm: '本当に退会しますか？' }, class: 'btn btn-danger' %></td>
+
+                    <% elsif @group_request.rejected? %>
+                      <td class="text-nowrap">申請が拒否されました</td>
+                    <% end %>
+
+                  <% end %>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <h3 class="text-center">グループに所属している会員</h3>
+
+      <div class='row py-3  d-flex align-items-center border-bottom border-top'>
+
+        <div  class="col-2">
+          <%= link_to public_customer_path(@group.owner), style:"text-decoration: none;" do %>
+            <%= image_tag @group.owner.get_profile_image(50,50), class:"icon" %>
+          <% end %>
+        </div>
+        <div class="col-6">
+          <%= link_to @group.owner.name, public_customer_path(@group.owner) %>
+        </div>
+        <div class="col-2 mr-1 offset-1 header-btn-fill small", style="width:50px">
+          グループオーナー
+        </div>
+
+
+      </div>
+
+      <div class='row py-3'>
+        <table class="table table-hover table-inverse">
+          <thead>
+            <tr>
+              <th></th>
+              <th>名前</th>
+              <th>状態</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @group_approved.each do |approved| %>
+              <tr>
+                <td>
+                  <%= link_to public_customer_path(approved.customer), style:"text-decoration: none;" do %>
+                    <%= image_tag approved.customer.get_profile_image(50,50), class:"icon" %>
+                  <% end %>
+                </td>
+                <td><%= link_to approved.customer.name, public_customer_path(approved.customer) %></td>
+                <td>
+                  <% if approved.customer.is_active == true %>
+                    <span class="text-success">有効</span>
+                  <% else %>
+                    <%= "退会済み" %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <div class="mx-auto">
+          <%= paginate @group_approved, theme: 'bootstrap-5', param_name: "approved_page", class:"text-center" %>
+        </div>
+      </div>
+
+      <!--申請の管理-->
+      <% if @group.owner == current_customer %>
+        <div class='row py-3'>
+          <h3 class="mx-auto py-3">申請の管理</h3>
+        </div>
+        <div class='row'>
+          <div class='col-6'>
+            <h5 class="text-center py-3">申請中の会員</h5>
+            <table class='table table-hover table-inverse'>
+              <thead>
+                <tr>
+                  <th>会員名</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @group_requests.each do |request| %>
+                  <tr>
+                    <th>
+                      <%= link_to public_customer_path(request.customer) do %>
+                        <%= request.customer.name %>
+                      <% end %>
+                    </th>
+                    <th>
+                      <%= link_to '承認', public_group_group_request_path(@group.id, request.id, is_status: :approved), method: :patch, class: "btn btn-success" %>
+                    </th>
+                    <th>
+                      <%= link_to '拒否', public_group_group_request_path(@group.id, request.id, is_status: :rejected), method: :patch, class: "btn btn-danger" %>
+                    </th>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+
+          <div class='col-6'>
+            <h5 class="text-center py-3">拒否した会員</h5>
+            <table class='table table-hover table-inverse'>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>名前</th>
+                  <th>状態</th>
+                  <th colspan="3"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @group_rejected.each do |rejected| %>
+                  <tr>
+                    <td>
+                      <%= link_to public_customer_path(rejected.customer), style:"text-decoration: none;" do %>
+                        <%= image_tag rejected.customer.get_profile_image(50,50), class:"icon" %>
+                      <% end %>
+                    </td>
+                    <td><%= link_to rejected.customer.name, public_customer_path(rejected.customer) %></td>
+                    <td>
+                      <% if rejected.customer.is_active == true %>
+                        <span class="text-success">有効</span>
+                      <% else %>
+                        退会済み
+                      <% end %>
+                    </td>
+                    <td>
+                      <%= link_to '承認', public_group_group_request_path(@group.id, rejected.id, is_status: :approved), method: :patch, class: "btn btn-info" %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="row">
+              <div class="mx-auto">
+                <%= paginate @group_requests, theme: 'bootstrap-5', param_name: "pending_page", class:"text-center" %>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="row">
+              <div class="mx-auto">
+                <div>
+                  <%= paginate @group_rejected, theme: 'bootstrap-5', param_name: "rejected_page", class:"text-center" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

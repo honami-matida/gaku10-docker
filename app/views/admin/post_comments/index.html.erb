@@ -1,0 +1,47 @@
+<div class="text-center h3 mb-5 py-3">
+  コメント一覧
+</div>
+
+<div class="container">
+  <div class="row py-3 mt-5">
+
+    <table class="table table-hover table-inverse mt-3">
+      <thead>
+        <tr>
+          <th>コメント日時</th>
+          <th>コメント</th>
+          <th>アイコン</th>
+          <th>名前</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @post_comments.each do |post_comment| %>
+          <tr>
+            <td>
+              <%= link_to admin_post_comment_path(post_comment) do %>
+                <%= post_comment.created_at.strftime("%Y/%m/%d %H:%M:%S") %>
+              <% end %>
+            </td>
+            <td>
+              <%= truncate(post_comment.comment, length: 30) %>
+            </td>
+            <td>
+              <%= image_tag post_comment.customer.get_profile_image(50,50), class:"icon" %>
+            </td>
+            <td>
+              <%= link_to admin_customer_path(post_comment.customer) do %>
+                <%= truncate(post_comment.customer.name, length: 15) %>
+              <% end %>
+            </td>
+          </tr>
+       <% end %>
+       </tbody>
+     </table>
+
+    <div class="row mx-auto">
+      <%= paginate @post_comments, theme: 'bootstrap-5' %>
+    </div>
+
+  </div>
+</div>

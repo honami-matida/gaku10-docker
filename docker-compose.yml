@@ -20,7 +20,7 @@ services:
   web:
     build: .
     volumes:   # ← 追加
-    - ./gaku10:/app
+      - ./:/app
     ports:
       - "3000:3000"
     depends_on:

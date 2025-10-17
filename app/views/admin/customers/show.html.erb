@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row py-5">
+    <div class="col-8 mx-auto">
+      <div class="row d-flex align-items-center">
+        <div class="col">
+            <h3 class="mt-5 text-center">会員登録情報</h3>
+        </div>
+      </div>
+      <div class="container-fluid my-5 flame-border">
+        <div class="row py-5">
+          <div class="col">
+            <div class="row">
+              <%= image_tag @customer.get_profile_image(100,100), class:"profile_icon d-block mx-auto" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <table class="table table-bordered">
+        <tr>
+          <td class="bg-light ">名前</td>
+          <td><%= @customer.name %></td>
+        </tr>
+        <tr>
+          <td class="bg-light text-nowrap">メールアドレス</td>
+          <td><%= @customer.email %></td>
+        </tr>
+        <tr>
+          <td class="bg-light">自己紹介文</td>
+          <td><%= @customer.introduction %></td>
+        </tr>
+        <tr>
+          <td class="bg-light">コメント</td>
+          <td><%= "#{@customer.post_comments.count} コメント" %></td>
+        </tr>
+        <%= form_with model: [:admin, @customer] do |f| %>
+          <tr>
+            <td class ="bg-light text-nowrap">会員ステータス</td>
+            <td>
+              <%= f.radio_button :is_active, :true %>
+              <%= f.label :is_active, "有効" %>
+
+              <%= f.radio_button :is_active, :false %>
+              <%= f.label :is_active, "退会" %>
+              <%= f.submit "変更を保存", class:"btn btn-success offset-1" %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

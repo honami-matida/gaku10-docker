@@ -1,0 +1,90 @@
+<div class="text-center h3 mb-5 py-3", style="background: #EBF1F5;">
+  投稿詳細
+</div>
+
+<div class="container">
+
+    <div class="row flame-border p-3">
+      <div class="col">
+
+        <div class="row border-bottom">
+          <div class="col-1 p-3">
+            <p class="">
+              <%= link_to public_customer_path(@post.customer), style:"text-decoration: none;" do %>
+                <%= image_tag @post.customer.get_profile_image(50,50), class:"icon" %>
+              <% end %>
+            </p>
+          </div>
+          <div class="col-11">
+            <p class=""><%= @post.customer.name %></p>
+            <p class=""><%= @post.created_at.strftime('%Y/%m/%d') %></p>
+          </div>
+        </div>
+
+        <div class="row border-bottom my-3">
+          <div class="col mx-auto">
+            <p class="">ジャンル：<%= @post.genre.name %></p>
+            <p class="col text-center text-wrap h3 py-3"><%= @post.title %></p>
+            <p class="text-wrap py-3"><%= @post.introduction %></p>
+            <% if @post.images.attached? %>
+              <% @post.images.each do |image| %>
+                <%= image_tag image, size: '500x500' %>
+              <% end %>
+            <% end %>
+            <div>
+              <% @post.tags.each do |tag| %>
+                <span class="label"><%= tag.name %></span>
+              <% end %>
+            </div>
+            <div class="m-3", style="text-decoration: none;">
+              <div id="favorite_btn_<%= @post.id%>" >
+                <%= render "public/favorites/btn", post: @post %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row p-3">
+          <% if @post.customer == current_customer %>
+            <%= link_to "編集する", edit_public_post_path(@post), class:"btn btn-info ml-3" %>
+            <%= link_to "削除する", public_post_path(@post), method: :delete, class:"btn btn-danger ml-3" %>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row p-3 mt-5 ">
+      <div class="col-8 flame-border mx-auto", style="background: #EBF1F5;">
+        <div class="m-3">
+          <% unless current_customer.guest_customer? %>
+            <%= form_with model: [@post, @post_comment], local: false, url: public_post_post_comments_path(@post, @post_comment), method: :post do |f| %>
+              <%= f.text_area :comment, rows:'4',cols:'50', placeholder: "コメントをここに入力して下さい", class: "text-area row mx-auto", id: "comment_textarea" %>
+              <div class="submit-btn">
+                <%= f.submit "送信する", class: "btn btn-info my-3 " %>
+              </div>
+            <% end %>
+          <% else %>
+            <p>コメントを投稿するにはログインしてください</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row flame-border my-3 p-3">
+      <div class="col">
+
+        <div id="comment_index">
+          <%= render "public/post_comments/index", book: @book %>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col d-flex justify-content-center">
+        <%= paginate @post_comments, theme: 'bootstrap-5' %>
+      </div>
+    </div>
+
+</div>
