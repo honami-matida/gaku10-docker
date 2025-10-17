@@ -7,6 +7,11 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: gaku10_development
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      # ここで UTF-8 を指定
+      MYSQL_CHARSET: utf8mb4
+      MYSQL_COLLATION: utf8mb4_general_ci
     volumes:
       - db-data:/var/lib/mysql
     ports:   # ← 追加

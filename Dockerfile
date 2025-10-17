@@ -13,7 +13,7 @@ RUN apt-get update -qq && apt-get install -y \
 # 作業ディレクトリ
 WORKDIR /app
 
-# ローカルにある gaku10 フォルダをコンテナにコピー
+# ローカルの Rails アプリをコンテナにコピー
 COPY gaku10/ /app
 
 # Gem をインストール
