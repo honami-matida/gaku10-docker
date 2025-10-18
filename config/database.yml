@@ -7,15 +7,16 @@
 default: &default
   adapter: mysql2 #変更
   encoding: utf8mb4 #追記
+  collation: utf8mb4_general_ci
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV['MYSQL_USER'] %> #追記
   password: <%= ENV['MYSQL_PASSWORD'] %> #追記
   host: <%= ENV['MYSQL_HOST'] %> #追記
-  database: <%= ENV['MYSQL_DATABASE'] %> #追記
   timeout: 5000
 
 development:
   <<: *default
+  database: <%= ENV['MYSQL_DATABASE'] %> #追記
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
