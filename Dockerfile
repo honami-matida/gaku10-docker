@@ -6,6 +6,8 @@ RUN apt-get update -qq && apt-get install -y \
     git \
     build-essential \
     libpq-dev \
+    # MySQL クライアントを Dockerfile に追加
+    **default-mysql-client** \ 
     && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs \
     && npm install -g yarn

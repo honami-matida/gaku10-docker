@@ -45,7 +45,6 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     favorites = Favorite.where(customer_id: @customer.id).pluck(:post_id)
     @favorite_posts = Post.where(id: favorites).page(params[:page]).per(9)
-    @post = Post.find(params[:id])
   end
 
   private

@@ -1,0 +1,77 @@
+==========================================
+ログ・エラーメッセージ分析記録
+==========================================
+
+日付：2025-10-22
+環境：macOS / Docker / Rails 7 / MySQL 8
+作業内容：コンテナ起動時・Railsサーバ起動時のログ調査
+
+------------------------------------------
+1. 操作タイムライン
+------------------------------------------
+[21:25:--] docker compose up -d
+[21:30:--] docker compose exec web rails s
+[21:35:--] ブラウザで http://localhost:3000/public/customers/1/favorites にアクセス
+[21:38:45] エラー発生（ActiveRecord::RecordNotFound）
+
+------------------------------------------
+2. エラーログ抜粋（development.logより）
+------------------------------------------
+Started GET "/public/customers/11/favorites" for 151.101.1.227 at 2025-10-21 21:38:45 +0000
+Cannot render console from 151.101.1.227! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  Parameters: {"id"=>"11"}
+  [1m[36mCustomer Load (1.7ms)[0m  [1m[34mSELECT `customers`.* FROM `customers` WHERE `customers`.`id` = 11 ORDER BY `customers`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/public/customers_controller.rb:54:in `authenticate_customer!'
+  [1m[36mCustomer Load (0.5ms)[0m  [1m[34mSELECT `customers`.* FROM `customers` WHERE `customers`.`id` = 11 LIMIT 1[0m
+  ↳ app/controllers/public/customers_controller.rb:45:in `favorites'
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT `favorites`.`post_id` FROM `favorites` WHERE `favorites`.`customer_id` = 11[0m
+  ↳ app/controllers/public/customers_controller.rb:46:in `favorites'
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT `posts`.* FROM `posts` WHERE `posts`.`id` = 11 LIMIT 1[0m
+  ↳ app/controllers/public/customers_controller.rb:48:in `favorites'
+Completed 404 Not Found in 15ms (ActiveRecord: 3.2ms | Allocations: 3360)
+Processing by Public::CustomersController#favorites as HTML
+
+ActiveRecord::RecordNotFound (Couldn't find Post with 'id'=11):
+app/controllers/public/customers_controller.rb:48:in `favorites'
+
+------------------------------------------
+3. 原因仮説
+------------------------------------------
+- seedのデータを入れていない
+- Public::CustomersController#favorites
+  @Post = Post.find(params[:id])
+  という行が残っているため、Rails が「post.id = 11」を探している
+
+
+------------------------------------------
+4. 対応内容
+------------------------------------------
+1. rails db:seed 実行
+2. Public::CustomersController#favorites
+  @Post = Post.find(params[:id])をコメントアウト
+3. docker compose exec web rails routes | grep favorites
+　　サーバーを再起動せずに確認
+4. ルートが/public/customers/:id/favoritesであることを確認
+5. http://localhost:3000/public/customers/1/favorites
+　　アクセスして確認
+6.2のコメントアウトを削除
+
+------------------------------------------
+5. 結果
+------------------------------------------
+実行結果：正常に起動
+確認内容：いいね一覧が表示されることを確認
+再発防止：・rails routes コマンドで確認する習慣づけ
+　　　　　・テストに追記する
+------------------------------------------
+6. メモ・気づき
+------------------------------------------
+- /customers/11/favorites の 11 は「Customerのid」
+- /posts/5/favorites の 5 は「Postのid」
+- params[:id] と params[:post_id]
+- エラー発生時にlogsに記録することで、あとから参照可能&再発防止
+- development.logでエラー内容を確認できる
+
+------------------------------------------
+7. 参考URL
+------------------------------------------
