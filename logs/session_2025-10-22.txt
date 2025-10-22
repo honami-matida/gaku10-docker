@@ -75,3 +75,70 @@ app/controllers/public/customers_controller.rb:48:in `favorites'
 ------------------------------------------
 7. 参考URL
 ------------------------------------------
+
+
+
+------------------------------------------
+1. 操作タイムライン
+------------------------------------------
+[19:44:--] http://localhost:3000/public/postsにアクセス
+[21:45:--] 画像をつけて投稿
+[21:45:--] エラー発生(NoMethodError)
+
+------------------------------------------
+2. エラーログ抜粋（development.logより）
+------------------------------------------
+tarted POST "/public/posts" for 151.101.1.227 at 2025-10-22 10:42:55 +0000
+Cannot render console from 151.101.1.227! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Public::PostsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "post"=>{"title"=>"冬の過ごし方", "introduction"=>"寒くなってきました。\r\n風邪をひかないよう、\r\nあたたかくしておすごしください\r\n", "genre_id"=>"3", "images"=>[#<ActionDispatch::Http::UploadedFile:0x0000ffff7ff3e178 @tempfile=#<Tempfile:/tmp/RackMultipart20251022-1-dvasto.png>, @original_filename="イラスト　焼き芋.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"post[images][]\"; filename=\"\xE3\x82\xA4\xE3\x83\xA9\xE3\x82\xB9\xE3\x83\x88\xE3\x80\x80\xE7\x84\xBC\xE3\x81\x8D\xE8\x8A\x8B.png\"\r\nContent-Type: image/png\r\n">]}, "commit"=>"投稿する"}
+  [1m[36mCustomer Load (0.7ms)[0m  [1m[34mSELECT `customers`.* FROM `customers` WHERE `customers`.`id` = 12 ORDER BY `customers`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/public/posts_controller.rb:13:in `create'
+Completed 500 Internal Server Error in 351ms (ActiveRecord: 0.7ms | Allocations: 6952)
+
+
+  
+NoMethodError (undefined method `[]' for nil:NilClass
+
+      if (error = response_body['responses'][0]['error']).present?
+                                            ^^^):
+  
+lib/vision.rb:37:in `get_image_data'
+app/controllers/public/posts_controller.rb:14:in `create
+
+------------------------------------------
+3. 原因仮説
+------------------------------------------
+- Google Vision APIキーが設定されていない／無効
+- ネットワークアクセスができない（Docker環境内など）
+- 画像の送信リクエストに失敗して、APIがエラーや空レスポンスを返している
+
+
+------------------------------------------
+4. 対応内容
+------------------------------------------
+1. recho $GOOGLE_API_KEY(Google Vision APIキーの確認)
+2. 実行結果：何も出力されない(環境変数が設定されていない)
+3. lib/vision.rb　に、APIキーがなくても投稿できるようコードを追記
+4. docker compose restart webを実行(サーバーを再起動)
+5. 画像付き投稿を実行
+6. ❌ Vision APIレスポンスが不正または空: {"error"=>{"code"=>403, "message"=>"Method doesn't allow unregistered callers (callers without established identity). Please use API Key or other form of API consumer identity to call this API.", "status"=>"PERMISSION_DENIED"}}
+   development.logで確認
+
+------------------------------------------
+5. 結果
+------------------------------------------
+実行結果：Vision APIキーにアクセスしようとしたが、
+　　　　　キーが認識されないため拒否されたが、投稿できるようにした
+確認内容：投稿が表示されることを確認
+再発防止：・APIキーがなくても投稿できるよう設定
+　　　　　・posts_controllarのAPIについての記述をコメントアウト
+------------------------------------------
+6. メモ・気づき
+------------------------------------------
+- APIは料金が発生するため、しようしなくても投稿できるように変更
+- もしAPI認証したい場合は、キーの再取得や、有効か確認が必要
+
+------------------------------------------
+7. 参考URL
+------------------------------------------

@@ -11,11 +11,13 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.customer_id = current_customer.id
-    tags = Vision.get_image_data(post_params[:images].first) # 画像ファイルを取得（配列から最初のファイルを使用）
+    #Vision APIを無効化
+    #tags = Vision.get_image_data(post_params[:images].first) # 画像ファイルを取得（配列から最初のファイルを使用）
     if @post.save
-      tags.each do |tag|
-        @post.tags.create(name: tag)
-      end
+      #Vision APIを無効化
+      #tags.each do |tag|
+        #@post.tags.create(name: tag)
+      #end 
       redirect_to public_post_path(@post)
     else
       flash.now[:notice] = "投稿に失敗しました"

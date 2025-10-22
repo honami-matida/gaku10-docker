@@ -33,6 +33,13 @@ module Vision
       request['Content-Type'] = 'application/json'
       response = https.request(request, params)
       response_body = JSON.parse(response.body)
+
+      # ↓↓↓ APIキー未設定でも投稿継続 ↓↓↓
+      if response_body['responses'].blank? || response_body['responses'][0].blank?
+        Rails.logger.error "❌ Vision APIレスポンスが不正または空: #{response_body.inspect}"
+        return []  # 空配列を返すことでアプリが落ちずに投稿できる
+      end
+      
       # APIレスポンス出力
       if (error = response_body['responses'][0]['error']).present?
         raise error['message']

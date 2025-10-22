@@ -45,11 +45,11 @@
             <% @group_approved.each do |approved| %>
               <tr>
                 <td>
-                  <%= link_to public_customer_path(approved.customer), style:"text-decoration: none;" do %>
+                  <%= link_to admin_customer_path(approved.customer), style:"text-decoration: none;" do %>
                     <%= image_tag approved.customer.get_profile_image(50,50), class:"icon" %>
                   <% end %>
                 </td>
-                <td><%= link_to approved.customer.name, public_customer_path(approved.customer) %></td>
+                <td><%= link_to approved.customer.name, admin_customer_path(approved.customer) %></td>
                 <td>
                   <% if approved.customer.is_active == true %>
                     <span class="text-success">有効</span>
