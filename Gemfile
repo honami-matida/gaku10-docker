@@ -6,7 +6,8 @@ ruby '3.1.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.7', '>= 6.1.7.8'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
+#gem 'sqlite3', '~> 1.4'   # ←本番MySQL 開発環境もMySQLで統一
+gem 'mysql2', '>= 0.5' # MySQLを全環境で使用
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -57,10 +58,15 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 
+#本番MySQL 開発環境もMySQLで統一
+#gem 'dotenv-rails'
+#group :production do
+  #gem 'mysql2'
+#end
+
+# --- 環境変数管理 ---
 gem 'dotenv-rails'
-group :production do
-  gem 'mysql2'
-end
+
 
 gem "net-smtp"
 gem "net-pop"

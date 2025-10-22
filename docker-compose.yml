@@ -10,6 +10,7 @@ services:
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
     volumes:
       - db-data:/var/lib/mysql
+      - ./mysql/conf.d:/etc/mysql/conf.d  
     ports:   # ← 追加
       - "3306:3306"
 
