@@ -2,6 +2,8 @@ services:
   db:
     image: mysql:5.7
     platform: linux/amd64   # ← 追加
+    env_file:
+      - .env   # ← 追加
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: gaku10_development
@@ -16,6 +18,8 @@ services:
 
   web:
     build: .
+    env_file:
+      - .env    # ← 追加
     volumes:   # ← 追加
       - ./:/app
     ports:

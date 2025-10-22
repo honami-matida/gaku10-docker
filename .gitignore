@@ -40,3 +40,7 @@ yarn-debug.log*
 .yarn-integrity
 
 /.env
+#追加
+/.env.production
+# macOS system files
+.DS_Store
