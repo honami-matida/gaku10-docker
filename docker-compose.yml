@@ -5,9 +5,9 @@ services:
     env_file:
       - .env   # ← 追加
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: gaku10_development
-      MYSQL_COLLATION: utf8mb4_general_ci
+      # MYSQL_ROOT_PASSWORD: password
+      # MYSQL_DATABASE: gaku10_development
+      # MYSQL_COLLATION: utf8mb4_general_ci
       TZ: Asia/Tokyo #追加　RailsとDBのタイムゾーン差を防ぐ
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
     volumes:
@@ -28,10 +28,10 @@ services:
       - db
     environment:
       RAILS_ENV: development
-      MYSQL_HOST: db
-      MYSQL_DATABASE: gaku10_development
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
+      #MYSQL_HOST: db
+      # MYSQL_DATABASE: gaku10_development
+      # MYSQL_USER: root
+      # MYSQL_PASSWORD: password
     tty: true
     stdin_open: true
 
