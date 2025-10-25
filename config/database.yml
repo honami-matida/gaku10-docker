@@ -27,4 +27,4 @@ test:
 
 production:
   <<: *default
-  database: <%= ENV['DB_DATABASE'] %>
+  database: <%= ENV['MYSQL_DATABASE'] %> #MYSQLに統一
