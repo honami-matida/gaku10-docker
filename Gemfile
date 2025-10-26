@@ -32,6 +32,11 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # --- Rspec追加 ---
+    gem 'rspec-rails'        #Rails用テストフレームワーク
+    gem 'factory_bot_rails'  #テストデータ生成
+    gem 'faker'              #ダミーデータ自動生成
+  # --- ここまで追加 ---
 end
 
 group :development do
@@ -74,4 +79,3 @@ gem "net-imap"
 
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'bootstrap5-kaminari-views', '~> 0.0.1'
-
