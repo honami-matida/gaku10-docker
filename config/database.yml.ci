@@ -1,0 +1,14 @@
+# config/database.yml.ci
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  collation: utf8mb4_unicode_ci   # ← 絵文字・日本語対応
+  pool: 5
+  username: root
+  password: password              # ← GitHub Actions側MySQLの設定と合わせる
+  host: 127.0.0.1                 # ← "localhost"ではなく127.0.0.1を指定
+  port: 3306                      # MySQLポート番号
+
+test:
+  <<: *default
+  database: gaku10_test           # テスト用データベース名

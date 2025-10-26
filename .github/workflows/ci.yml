@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:5.7                 # ★ 5.7 固定
+        env:
+          MYSQL_ROOT_PASSWORD: password  # ★ database.yml.ci と合わせる
+          MYSQL_DATABASE: gaku10_test
+        ports:
+          - "3306:3306"
+        options: >-
+          --health-cmd="mysqladmin ping -ppassword -h 127.0.0.1"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=20
+
+    env:
+      RAILS_ENV: test
+      BUNDLE_WITHOUT: "development:production"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1.2'
+          bundler-cache: true
+
+      # mysql2 のビルドに必要（環境によっては不要だが、入れておくと安心）
+      - name: Install system deps for mysql2
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libmysqlclient-dev
+
+      # Webpacker を使っていないならこの Node セットアップは不要
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '16'        # Webpacker 5系は Node 16 が安定
+      - name: Install JS deps
+        run: |
+          if [ -f yarn.lock ]; then yarn install --frozen-lockfile; fi
+
+      - name: Prepare DB
+        run: |
+          cp config/database.yml.ci config/database.yml
+          bundle exec rails db:prepare
+
+      - name: Run RSpec
+        run: bundle exec rspec --format documentation
