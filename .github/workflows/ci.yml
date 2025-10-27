@@ -30,6 +30,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          clean: false
+          # 前回のジョブの残骸を削除を　オフ
 
       - uses: ruby/setup-ruby@v1
         with:
@@ -73,11 +76,3 @@ jobs:
 
       - name: Run RSpec
         run: bundle exec rspec --format documentation
-
-      - name: Cleanup MySQL config
-        if: always()
-        run: |
-          sudo docker ps -a
-          sudo docker stop $(sudo docker ps -q) || true
-          sudo docker rm $(sudo docker ps -aq) || true
-          sudo rm -rf config/mysql || true
