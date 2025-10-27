@@ -17,13 +17,12 @@ jobs:
           MYSQL_DATABASE: gaku10_test
         ports:
           - "3306:3306"
-        options: |
-          --health-cmd="mysqladmin ping -ppassword -h 127.0.0.1"
-          --health-interval=5s
-          --health-timeout=5s
-          --health-retries=20
-          --character-set-server=utf8mb4
-          --collation-server=utf8mb4_general_ci
+    options: >-
+      --health-cmd="mysqladmin ping -ppassword -h localhost"
+      --health-interval=5s
+      --health-timeout=10s
+      --health-retries=5
+      --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
     env:
       RAILS_ENV: test
@@ -52,11 +51,11 @@ jobs:
           if [ -f yarn.lock ]; then yarn install --frozen-lockfile; fi
 
       - name: Prepare DB
+        # MySQLの起動を10〜15秒待つ（文字コード設定反映のため）
         run: |
           cp config/database.yml.ci config/database.yml
-          # MySQLの起動を10〜15秒待つ（文字コード設定反映のため）
+          echo "Waiting for MySQL to be ready..."
           until mysqladmin ping -h 127.0.0.1 -ppassword --silent; do
-            echo "Waiting for MySQL to be ready..."
             sleep 3
           done
           bundle exec rails db:prepare
