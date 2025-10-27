@@ -71,6 +71,13 @@ jobs:
       - name: Fix permissions for MySQL config
         run: sudo chown -R $USER:$USER config/mysql
 
-
       - name: Run RSpec
         run: bundle exec rspec --format documentation
+
+      - name: Cleanup MySQL config
+        if: always()
+        run: |
+          sudo docker ps -a
+          sudo docker stop $(sudo docker ps -q) || true
+          sudo docker rm $(sudo docker ps -aq) || true
+          sudo rm -rf config/mysql || true
