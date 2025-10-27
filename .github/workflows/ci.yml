@@ -2,85 +2,42 @@ name: CI
 
 on:
   push:
-    branches: [ main, develop ]
-  pull_request:
+    branches: [main, develop]
 
 jobs:
   rspec:
     runs-on: ubuntu-latest
-
-    services:
-      mysql:
-        image: mysql:8.0                 # ★ 5.7 固定
-        env:
-          MYSQL_ROOT_PASSWORD: password  # ★ database.yml.ci と合わせる
-          MYSQL_DATABASE: gaku10_test
-        ports:
-          - "3306:3306"
-        options: >-
-          --character-set-server=utf8mb4
-          --collation-server=utf8mb4_unicode_ci
-          --health-cmd="mysqladmin ping -ppassword -h 127.0.0.1"
-          --health-interval=5s
-          --health-timeout=10s
-          --health-retries=5
-          --default-authentication-plugin=mysql_native_password
     env:
       RAILS_ENV: test
-      BUNDLE_WITHOUT: "development:production"
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: gaku10_test
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          clean: false
-          # 前回のジョブの残骸を削除を　オフ
-
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1.2'
           bundler-cache: true
 
-      # mysql2 のビルドに必要（環境によっては不要だが、入れておくと安心）
-      - name: Install system deps for mysql2
+      - name: Start MySQL container manually
         run: |
-          sudo apt-get update
-          sudo apt-get install -y libmysqlclient-dev
+          docker run -d --rm \
+            --name mysql_test \
+            -e MYSQL_ROOT_PASSWORD=password \
+            -e MYSQL_DATABASE=gaku10_test \
+            -p 3306:3306 \
+            --health-cmd="mysqladmin ping -ppassword -h 127.0.0.1" \
+            --health-interval=5s \
+            --health-timeout=10s \
+            --health-retries=5 \
+            mysql:8.0
+          echo "Waiting for MySQL to start..."
+          sleep 25
 
-      # Webpacker を使っていないならこの Node セットアップは不要
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '16'        # Webpacker 5系は Node 16 が安定
-      - name: Install JS deps
-        run: |
-          if [ -f yarn.lock ]; then yarn install --frozen-lockfile; fi
-
-      - name: Create MySQL config for CI
-        run: |
-          mkdir -p config/mysql
-          echo "[mysqld]" > config/mysql/ci.cnf
-          echo "character-set-server=utf8mb4" >> config/mysql/ci.cnf
-          echo "collation-server=utf8mb4_unicode_ci" >> config/mysql/ci.cnf
-
-
-      - name: Prepare DB
-        # MySQLの起動を10〜15秒待つ（文字コード設定反映のため）
+      - name: Setup database
         run: |
           cp config/database.yml.ci config/database.yml
-          echo "Waiting for MySQL to be ready..."
-          until mysqladmin ping -h 127.0.0.1 -ppassword --silent; do
-            sleep 3
-          done
           bundle exec rails db:prepare
-
-      - name: Fix permissions for MySQL config
-        run: sudo chown -R $USER:$USER config/mysql
 
       - name: Run RSpec
         run: bundle exec rspec --format documentation
-
-      - name: Cleanup
-        if: always()
-        run: |
-          docker ps -a
-          docker stop $(docker ps -q) || true
-          docker rm $(docker ps -aq) || true
