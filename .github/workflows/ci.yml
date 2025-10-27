@@ -54,6 +54,11 @@ jobs:
       - name: Prepare DB
         run: |
           cp config/database.yml.ci config/database.yml
+          # MySQLの起動を10〜15秒待つ（文字コード設定反映のため）
+          until mysqladmin ping -h 127.0.0.1 -ppassword --silent; do
+            echo "Waiting for MySQL to be ready..."
+            sleep 3
+          done
           bundle exec rails db:prepare
 
       - name: Run RSpec
