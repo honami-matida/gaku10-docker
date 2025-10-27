@@ -53,14 +53,6 @@ jobs:
         run: |
           if [ -f yarn.lock ]; then yarn install --frozen-lockfile; fi
 
-      - name: Wait for MySQL
-        run: |
-          echo "Waiting for MySQL to be ready..."
-          until mysqladmin ping -h 127.0.0.1 -ppassword --silent; do
-            sleep 3
-          done
-
-
       - name: Create MySQL config for CI
         run: |
           mkdir -p config/mysql
@@ -85,7 +77,7 @@ jobs:
       - name: Run RSpec
         run: bundle exec rspec --format documentation
 
-      - name: Stop MySQL service
+      - name: Cleanup
         if: always()
         run: |
           docker ps -a
