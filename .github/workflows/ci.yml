@@ -16,7 +16,7 @@ jobs:
           MYSQL_ROOT_PASSWORD: password  # ★ database.yml.ci と合わせる
           MYSQL_DATABASE: gaku10_test
         ports:
-          - "3306:3306"
+          - "3307:3306"
         options: >-
           --character-set-server=utf8mb4
           --collation-server=utf8mb4_unicode_ci
