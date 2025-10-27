@@ -11,7 +11,7 @@ jobs:
 
     services:
       mysql:
-        image: mysql:8.0                # ★ 5.7 固定
+        image: mysql:8.0                 # ★ 5.7 固定
         env:
           MYSQL_ROOT_PASSWORD: password  # ★ database.yml.ci と合わせる
           MYSQL_DATABASE: gaku10_test
