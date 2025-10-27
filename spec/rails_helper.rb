@@ -61,6 +61,15 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
+  # FactoryBotのメソッド（create, buildなど）を使えるようにする
   config.include FactoryBot::Syntax::Methods
+  
+  # deviseのテストヘルパー
+  config.include Devise::Test::ControllerHelpers, type: :controller
+
+  #spec/system/ に ブラウザ操作テスト（ログイン画面を開く、ボタンを押す、など）を追加
+  config.before(:each, type: :system) do
+    driven_by :rack_test
+  end
 
 end
