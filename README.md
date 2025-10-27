@@ -57,6 +57,28 @@
 - フレームワーク：Ruby on Rails 6.1.7.8
 - JSライブラリ：jQuery
 - IDE：Cloud9
+
+### 開発環境構築
+- **Docker** を使用し、ローカル環境をコンテナ化  
+  - Web（Rails）／DB（MySQL）コンテナを構成  
+  - `docker-compose.yml` により環境の再現性を確保  
+- Ruby 3.1.2, Rails 6.1.7.8, MySQL 5.7 構成
+
+### データベース
+- MySQL（ローカル・CI・本番環境すべて統一）
+- 文字コードを `utf8mb4` に設定（絵文字対応）
+
+### テスト自動化（CI/CD）
+- **RSpec** によるモデル・バリデーションテスト導入
+- **GitHub Actions** を用いた自動テスト環境を構築  
+  - Push 時に自動で `bundle exec rspec` を実行  
+  - MySQL 5.7 コンテナを連携したテスト環境を構築  
+- 将来的には AWS EC2 デプロイ後に CI/CD を拡張予定
+
+### その他
+- `.env` による環境変数管理（`dotenv-rails` 使用）
+- `credentials.yml.enc` を用いた本番用APIキー管理
+- Nginx + Puma による本番サーバー構成（予定）
 ​
 ## 使用素材
 <!-- - 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。 -->
