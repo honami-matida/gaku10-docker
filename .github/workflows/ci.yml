@@ -17,8 +17,6 @@ jobs:
           MYSQL_DATABASE: gaku10_test
         ports:
           - "3306:3306"
-        volumes:
-          - ./config/mysql/ci.cnf:/etc/mysql/conf.d/ci.cnf
         options: >-
           --health-cmd="mysqladmin ping -ppassword -h localhost"
           --health-interval=5s
