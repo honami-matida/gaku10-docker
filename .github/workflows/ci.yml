@@ -50,6 +50,14 @@ jobs:
         run: |
           if [ -f yarn.lock ]; then yarn install --frozen-lockfile; fi
 
+      - name: Create MySQL config for CI
+        run: |
+          mkdir -p config/mysql
+          echo "[mysqld]" > config/mysql/ci.cnf
+          echo "character-set-server=utf8mb4" >> config/mysql/ci.cnf
+          echo "collation-server=utf8mb4_unicode_ci" >> config/mysql/ci.cnf
+
+
       - name: Prepare DB
         # MySQLの起動を10〜15秒待つ（文字コード設定反映のため）
         run: |
