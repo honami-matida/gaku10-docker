@@ -11,12 +11,12 @@ jobs:
 
     services:
       mysql:
-        image: mysql:5.7                 # ★ 5.7 固定
+        image: mysql:5.7.44                # ★ 5.7 固定
         env:
           MYSQL_ROOT_PASSWORD: password  # ★ database.yml.ci と合わせる
           MYSQL_DATABASE: gaku10_test
         ports:
-          - "3307:3306"
+          - "3306:3306"
         options: >-
           --character-set-server=utf8mb4
           --collation-server=utf8mb4_unicode_ci
