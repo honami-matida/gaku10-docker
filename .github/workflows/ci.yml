@@ -22,6 +22,8 @@ jobs:
           --health-interval=5s
           --health-timeout=5s
           --health-retries=20
+          --character-set-server=utf8mb4
+          --collation-server=utf8mb4_general_ci
 
     env:
       RAILS_ENV: test
