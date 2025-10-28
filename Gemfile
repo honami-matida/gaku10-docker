@@ -37,6 +37,7 @@ group :development, :test do
     gem 'factory_bot_rails'  #テストデータ生成
     gem 'faker'              #ダミーデータ自動生成
   # --- ここまで追加 ---
+    gem 'rails-controller-testing' #コントローラのインスタンス変数を参照する機能
 end
 
 group :development do

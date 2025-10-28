@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  let(:post) { build(:post) }
+  let(:customer) { create(:customer) }
+  let(:genre) { create(:genre) }
+  let(:post) { build(:post, customer: customer, genre: genre) }
 
   context 'バリデーションのテスト' do
     it 'タイトルと本文があれば有効である' do
