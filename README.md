@@ -11,9 +11,11 @@
   - 管理者 email: 123@456 / 123456
 
 ## 画面イメージ
-![ログイン画面](docs/images/ログイン画面.png)
-![投稿一覧](docs/images/投稿一覧.png)
-![投稿詳細](docs/images/投稿詳細.png)
+<p align="center">
+  <img src="docs/images/ログイン画面.png" width="30%">
+  <img src="docs/images/投稿一覧.png" width="30%">
+  <img src="docs/images/投稿詳細.png" width="30%">
+</p>
 
 ### サイトテーマ
 ・コミュニティサイト
@@ -82,43 +84,68 @@
 ### 機能紹介（GIF付きデモ）
 
 ### 1. ゲストログイン
+<details>
+<summary>▶ クリックして再生（ゲストログインデモ）</summary>
 
-https://github.com/user-attachments/assets/3b8aa9b5-bbb7-40ab-9ac7-86268c44f27b
+<br>
+
+
+[https://github.com/user-attachments/assets/3b8aa9b5-bbb7-40ab-9ac7-86268c44f27b](https://github.com/user-attachments/assets/3b8aa9b5-bbb7-40ab-9ac7-86268c44f27b)
+
+
+</details>
 
 ### 2. 投稿機能
+<details>
+<summary>▶ クリックして再生（投稿機能デモ）</summary>
+
+<br>
 
 
-https://github.com/user-attachments/assets/18a22f10-1c80-4f5f-89e9-11ee8b1996fc
+[https://github.com/user-attachments/assets/3b8aa9b5-bbb7-40ab-9ac7-86268c44f27b](https://github.com/user-attachments/assets/18a22f10-1c80-4f5f-89e9-11ee8b1996fc)
 
 
+</details>
 
 ### 3. コメント機能
+<details>
+<summary>▶ クリックして再生（コメント機能デモ）</summary>
 
+<br>
 
-https://github.com/user-attachments/assets/39f22225-1de2-4c39-8bad-1f7e1995c382
+[https://github.com/ユーザー名/リポジトリ名/assets/動画ID](https://github.com/user-attachments/assets/39f22225-1de2-4c39-8bad-1f7e1995c382)
 
-
+</details>
 
 ### 4. いいね機能
+<details>
+<summary>▶ クリックして再生（いいね機能デモ）</summary>
 
+<br>
 
-https://github.com/user-attachments/assets/3d995284-ed57-4807-ae7d-cc83f200f3ad
+[https://github.com/ユーザー名/リポジトリ名/assets/動画ID](https://github.com/user-attachments/assets/3d995284-ed57-4807-ae7d-cc83f200f3ad)
 
-
+</details>
 
 ### 5. 投稿検索機能
+<details>
+<summary>▶ クリックして再生（投稿機能デモ）</summary>
 
+<br>
 
-https://github.com/user-attachments/assets/7154f2c4-4a0d-4cd2-8e63-76407a11fa68
+[https://github.com/ユーザー名/リポジトリ名/assets/動画ID](https://github.com/user-attachments/assets/7154f2c4-4a0d-4cd2-8e63-76407a11fa68)
 
-
+</details>
 
 ### 6. グループ参加〜承認
+<details>
+<summary>▶ クリックして再生（グループ参加〜承認デモ）</summary>
 
+<br>
 
-https://github.com/user-attachments/assets/8fe680c1-f5be-4d70-8579-dd9c5826c0ed
+[https://github.com/ユーザー名/リポジトリ名/assets/動画ID](https://github.com/user-attachments/assets/8fe680c1-f5be-4d70-8579-dd9c5826c0ed)
 
-
+</details>
 
 ## 開発環境 / 使用技術
 
@@ -162,11 +189,35 @@ https://github.com/user-attachments/assets/8fe680c1-f5be-4d70-8579-dd9c5826c0ed
 ## 設計書
 
 ### 画面遷移図
-![会員側](docs/images/がく10_UIflow図-会員.drawio.png)
+<details>
+<summary>▶ 画面遷移図（会員側）</summary>
+
+<br>
+
+![会員側画面遷移図](docs/images/がく10_UIflow図-会員.drawio.png)
+
+</details>
+</details>
+
+<details>
+<summary>▶ 画面遷移図（管理者側）</summary>
+
+<br>
+
 ![管理者側](docs/images/がく10_UIflow図-管理者.drawio.png)
 
+
+</details>
+
 ### ER図
+<details>
+<summary>▶ ER図</summary>
+
+<br>
+
 ![ER図](docs/images/がく10_ER図.drawio.png)
+
+</details>
 
 <!-- 【補足説明】 -->
 <!-- - テーマ提出時点では不要です。 -->
