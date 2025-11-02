@@ -6,9 +6,15 @@
 ## URL
 本番環境：http://13.159.207.183/
 
-テストユーザー：
-  - 会員 email : mattchan@example.com / pass : macchan
-  - 管理者 email: 123@456 / 123456
+## デモログイン
+一般ユーザー:  
+Email: mattchan@example.com  
+Password: macchan  
+
+管理ユーザー（/admin）  
+Email: 123@456  
+Password: 123456
+管理画面URL：http://admin/sign_in
 
 ## 画面イメージ
 <p align="center">
