@@ -120,8 +120,8 @@
 ## 設計書
 
 ### 画面遷移図
-![会員側](docs/docs/がく10_UIflow図-会員.drawio.png)
-![管理者側](docs/docs/がく10_UIflow図-管理者.drawio.png)
+![会員側](docs/images/がく10_UIflow図-会員.drawio.png)
+![管理者側](docs/images/がく10_UIflow図-管理者.drawio.png)
 
 ### ER図
 ![ER図](docs/images/がく10_ER図.drawio.png)
