@@ -14,7 +14,7 @@ Password: macchan
 管理ユーザー（/admin）  
 Email: 123@456  
 Password: 123456
-管理画面URL：http://admin/sign_in
+管理画面URL：[http://admin/sign_in](http://13.159.207.183/admin/sign_in)
 
 ## 画面イメージ
 <p align="center">
