@@ -11,10 +11,10 @@
 Email: mattchan@example.com  
 Password: macchan  
 
-管理ユーザー（/admin）  
+管理ユーザー: <br>
 Email: 123@456  
-Password: 123456
-管理画面URL：[http://admin/sign_in](http://13.159.207.183/admin/sign_in)
+Password: 123456 <br>
+管理画面URL: [http://admin/sign_in](http://13.159.207.183/admin/sign_in)
 
 ## 画面イメージ
 <p align="center">
