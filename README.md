@@ -88,17 +88,37 @@ https://github.com/user-attachments/assets/3b8aa9b5-bbb7-40ab-9ac7-86268c44f27b
 ### 2. 投稿機能
 
 
+https://github.com/user-attachments/assets/18a22f10-1c80-4f5f-89e9-11ee8b1996fc
+
+
+
 ### 3. コメント機能
-![comment](docs/gif/comment.gif)
+
+
+https://github.com/user-attachments/assets/39f22225-1de2-4c39-8bad-1f7e1995c382
+
+
 
 ### 4. いいね機能
-![like](docs/gif/like.gif)
+
+
+https://github.com/user-attachments/assets/3d995284-ed57-4807-ae7d-cc83f200f3ad
+
+
 
 ### 5. 投稿検索機能
-![search](docs/gif/search.gif)
+
+
+https://github.com/user-attachments/assets/7154f2c4-4a0d-4cd2-8e63-76407a11fa68
+
+
 
 ### 6. グループ参加〜承認
-![group](docs/gif/group.gif)
+
+
+https://github.com/user-attachments/assets/8fe680c1-f5be-4d70-8579-dd9c5826c0ed
+
+
 
 ## 開発環境 / 使用技術
 
@@ -154,7 +174,7 @@ https://github.com/user-attachments/assets/3b8aa9b5-bbb7-40ab-9ac7-86268c44f27b
 
 ## 使用素材
 README に掲載している画像（画面イメージ用の投稿詳細画面）は**Canva** を使用して作成した素材です。
-- 制作ツール：Canva（https://www.canva.com/）
+- 制作ツール：Canva（[https://www.canva.com/](https://www.canva.com/templates)）
 - 写真・イラスト素材：Canva内のフリー素材または自作
 
 <!-- - 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。 -->
