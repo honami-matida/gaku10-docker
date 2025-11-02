@@ -1,0 +1,9 @@
+secret_key_base: 62f1fb3f71c0353b8e4fe5f4f0a88afbdcaaf3a5308fd3b75b95b82d39239b8b295967f5b3791ce9b158047287d91a5d7db0957aade52643514b467f1dd162d5
+
+db:
+  password: KyjbJkzgpc9TqwqP2RvJ
+
+# aws:
+#   access_key_id: 123
+#   secret_access_key: 345
+
