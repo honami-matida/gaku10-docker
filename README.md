@@ -79,6 +79,27 @@
 
 [機能一覧（Googleスプレッドシート）はこちら](https://docs.google.com/spreadsheets/d/1Vb5UsHXsSUoyXeMPCto1-Y2efOiO78HGAOJz46vWdVk/edit?pli=1&gid=552022097#gid=552022097)
 ​
+### 機能紹介（GIF付きデモ）
+
+### 1. ゲストログイン
+
+https://github.com/user-attachments/assets/3b8aa9b5-bbb7-40ab-9ac7-86268c44f27b
+
+### 2. 投稿機能
+
+
+### 3. コメント機能
+![comment](docs/gif/comment.gif)
+
+### 4. いいね機能
+![like](docs/gif/like.gif)
+
+### 5. 投稿検索機能
+![search](docs/gif/search.gif)
+
+### 6. グループ参加〜承認
+![group](docs/gif/group.gif)
+
 ## 開発環境 / 使用技術
 
 | 分類 | 使用技術 |
