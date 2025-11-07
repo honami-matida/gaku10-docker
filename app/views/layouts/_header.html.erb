@@ -28,7 +28,7 @@
               <div class="search_form">
                   <%= form_with url: public_search_path, local: true, method: :get do |f| %>
                     <%= f.text_field :word %>
-                    <%= f.select :model, options_for_select([['customer'], ['post']]) %>
+                    <%= f.select :model, options_for_select([['会員', 'customer'], ['投稿', 'post']]) %>
                     <%= button_tag type: "submit", class: "search-btn", style:"width: 50px;" do %>
                       <i class="fas fa-search"></i>
                     <% end %>

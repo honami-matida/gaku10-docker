@@ -56,7 +56,18 @@
 
         <div class="row mb-5">
           <% if customer_signed_in? && current_customer.id == @customer.id %>
-            <%= link_to "編集する", profile_edit_public_customer_path, class:"btn btn-info d-block mx-auto" %>
+            <% if current_customer.guest_customer? %>
+              <%= link_to "ログインして編集する",
+                  destroy_customer_session_path,
+                  method: :delete,
+                  data: { confirm: "ゲストユーザーは編集できません。ログイン画面に移動します。" },
+                  class:"btn btn-outline-info d-block mx-auto" %>
+            
+            <% else %>
+              <!-- ゲスト or 他の人の場合：ログインへ -->
+              <%= link_to "編集する", profile_edit_public_customer_path, class:"btn btn-info d-block mx-auto" %>
+            
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -75,7 +86,7 @@
             </div>
 
             <div class="row">
-              <p>タイトル:　<%= link_to post.title, public_post_path(post) %></p>
+              <p>タイトル: <%= link_to post.title, public_post_path(post) %></p>
             </div>
 
              <div class="row">

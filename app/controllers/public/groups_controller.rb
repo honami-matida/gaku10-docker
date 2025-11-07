@@ -10,7 +10,7 @@ class Public::GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     @group.owner_id = current_customer.id #ログインしている会員がオーナーとする
-    if @group.save!
+    if @group.save
       redirect_to public_group_path(@group), notice: "グループを作成しました。"
     else
       flash.now[:alert] = "作成できません"

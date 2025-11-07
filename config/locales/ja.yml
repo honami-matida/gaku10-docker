@@ -1,0 +1,18 @@
+ja:
+  activerecord:
+    attributes:
+      group:
+        name: グループ名
+        introduction: 紹介文
+  errors:
+    messages:
+      blank: "を入力してください"
+      too_short: "は%{count}文字以上で入力してください"
+
+  activerecord:
+    models:
+      customer: 会員
+    attributes:
+      customer:
+        name: 名前
+        introduction: 紹介文

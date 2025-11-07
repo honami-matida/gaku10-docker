@@ -27,14 +27,12 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    to  = Time.current.at_end_of_day
-    from  = (to - 6.day).at_beginning_of_day
-    @posts = Post.all.page(params[:page]).per(9)
+    @posts = Post.latest.page(params[:page]).per(9)
     if params[:latest]
       @posts = Post.latest.page(params[:page]).per(9)
     elsif params[:old]
       @posts = Post.old.page(params[:page]).per(9)
-    else
+    elsif params[:favorite_count]
       to  = Time.current.at_end_of_day
       from  = (to - 6.day).at_beginning_of_day
       @posts = Post.all.sort {|a,b|
@@ -81,7 +79,7 @@ class Public::PostsController < ApplicationController
 
   def authenticate_customer!
     unless customer_signed_in?
-      flash[:alert] = "ログインが必要です。"
+      flash[:alert] = "ログインが必要です"
       redirect_to root_path
     end
   end
@@ -90,15 +88,15 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     customer = @post.customer
     unless customer.id == current_customer.id
-      flash[:alert] = "投稿した会員でないので編集できません。"
-      redirect_to root_path
+      flash[:alert] = "投稿したユーザーではないので編集できません"
+      redirect_to public_posts_path
     end
   end
 
   def ensure_guest_customer
 
     if customer_signed_in? && current_customer.guest_customer?
-      redirect_to public_customer_path(current_customer) , notice: "ゲストユーザーは新規投稿画面へ遷移できません。"
+      redirect_to public_customer_path(current_customer) , notice: "ゲストユーザーは新規投稿画面へ遷移できません"
     end
   end
 
