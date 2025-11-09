@@ -1,3 +1,8 @@
+<%# resource が存在しないページでは何も表示せず return %>
+<% unless defined?(resource) && resource.present? %>
+  <% return %>
+<% end %>
+
 <% if resource.errors.any? %>
   <div id="error_explanation" data-turbo-cache="false">
     

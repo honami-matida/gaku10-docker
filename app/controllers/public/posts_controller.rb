@@ -27,6 +27,8 @@ class Public::PostsController < ApplicationController
   end
 
   def index
+    to  = Time.current.at_end_of_day
+    from  = (to - 6.day).at_beginning_of_day
     @posts = Post.latest.page(params[:page]).per(9)
     if params[:latest]
       @posts = Post.latest.page(params[:page]).per(9)

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row py-5">
-    <div class="col-5">
+    <div class="col-5 text-center">
       <div class ="row flame-border">
         <div class="col">
 
@@ -55,20 +55,15 @@
         </div>
 
         <div class="row mb-5">
-          <% if customer_signed_in? && current_customer.id == @customer.id %>
-            <% if current_customer.guest_customer? %>
-              <%= link_to "ログインして編集する",
-                  destroy_customer_session_path,
-                  method: :delete,
-                  data: { confirm: "ゲストユーザーは編集できません。ログイン画面に移動します。" },
-                  class:"btn btn-outline-info d-block mx-auto" %>
-            
-            <% else %>
-              <!-- ゲスト or 他の人の場合：ログインへ -->
-              <%= link_to "編集する", profile_edit_public_customer_path, class:"btn btn-info d-block mx-auto" %>
-            
+          <div class="col text-center">
+            <% if customer_signed_in? && current_customer.id == @customer.id %>
+              <% if current_customer.guest_customer? %>
+                <%= link_to "新規登録して編集する", destroy_customer_session_path, method: :delete, class: "btn-round" %>
+              <% else %>
+                <%= link_to "編集する", profile_edit_public_customer_path, class:"btn btn-info btn-sm btn-round" %>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
         </div>
       </div>
     </div>

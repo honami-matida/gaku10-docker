@@ -28,7 +28,7 @@
             <p class="text-wrap py-3"><%= @post.introduction %></p>
             <% if @post.images.attached? %>
               <% @post.images.each do |image| %>
-                <%= image_tag image, size: '500x500' %>
+                <%= image_tag image, class: "post-image" %>
               <% end %>
             <% end %>
             <div>
@@ -56,6 +56,7 @@
 
     <div class="row p-3 mt-5 ">
       <div class="col-8 flame-border mx-auto", style="background: #EBF1F5;">
+        <div id="comment_error_area"></div>
         <div class="m-3">
           <% unless current_customer.guest_customer? %>
             <%= form_with model: [@post, @post_comment], local: false, url: public_post_post_comments_path(@post, @post_comment), method: :post do |f| %>
@@ -66,6 +67,9 @@
             <% end %>
           <% else %>
             <p>コメントを投稿するにはログインしてください</p>
+            <div class="text-center">
+              <%= link_to "新規登録してコメントを投稿する", destroy_customer_session_path, method: :delete, class: "btn-round" %>
+            </div>
           <% end %>
         </div>
       </div>
@@ -75,7 +79,7 @@
       <div class="col">
 
         <div id="comment_index">
-          <%= render "public/post_comments/index", book: @book %>
+          <%= render "public/post_comments/index", post: @post, post_comments: @post_comments %>
         </div>
 
       </div>

@@ -35,7 +35,9 @@
 
         <div class="form-group">
           <% if current_customer.guest_customer? %>
-            <%= link_to "ログインへ(About)",destroy_customer_session_path, method: :delete, class:"btn btn-outline-info" %>
+            <div class="text-center">
+              <%= link_to "新規登録してグループを作成する",destroy_customer_session_path, method: :delete, class: "btn-round" %>
+            </div>
           <% else %>
             <%= f.submit '作成する', class: 'btn btn-info' %>
           <% end %>
