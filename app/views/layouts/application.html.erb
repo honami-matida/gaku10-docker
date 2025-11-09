@@ -9,17 +9,24 @@
     <script src="https://kit.fontawesome.com/34c28f9202.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  
   </head>
 
   <body class="d-flex flex-column vh-100">
     <%= render 'layouts/header' %>
-    <main class ="mb-auto">
+
+    <div id="comment_flash_area" class="flash-container"></div>
+
       <div>
         <% flash.each do |message_type, message| %>
           <div class="flash-message <%= message_type %>"><%= message %></div>
         <% end %>
       </div>
+
+    <main class ="mb-auto">
+
       <%= yield %>
     </main>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

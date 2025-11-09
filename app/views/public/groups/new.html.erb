@@ -2,6 +2,15 @@
   <div class='row py-5'>
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
       <h3 class="text-center">グループ作成フォーム</h3>
+      <% if @group.errors.any? %>
+        <div class="alert alert-danger">
+          <ul class="mb-0">
+            <% @group.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <%#= form_with model: @group, local: true do |f| %>
       <%= form_with model: @group, url: public_groups_path, local: true do |f| %>
         <div class="form-group">
@@ -26,7 +35,9 @@
 
         <div class="form-group">
           <% if current_customer.guest_customer? %>
-            <%= link_to "ログインへ(About)",destroy_customer_session_path, method: :delete, class:"btn btn-outline-info" %>
+            <div class="text-center">
+              <%= link_to "新規登録してグループを作成する",destroy_customer_session_path, method: :delete, class: "btn-round" %>
+            </div>
           <% else %>
             <%= f.submit '作成する', class: 'btn btn-info' %>
           <% end %>

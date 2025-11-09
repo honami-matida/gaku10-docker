@@ -7,6 +7,7 @@
     <div class='col'>
       <div class='row'>
         <div class="mx-auto">
+
           <table class='table table-hover table-inverse'>
             <thead>
               <tr>
@@ -39,7 +40,13 @@
                       <td class="text-nowrap">申請中です</td>
                     <% elsif @group_request.approved? %>
                         <td class="text-nowrap">グループのメンバーです</td>
-                        <td><%= link_to 'グループから退会', public_group_group_request_path(@group), method: :delete, data: { confirm: '本当に退会しますか？' }, class: 'btn btn-danger' %></td>
+                        <td>
+                          <%= link_to 'グループから退会',
+                            public_group_group_request_path(@group),
+                            method: :delete,
+                            data: { confirm: '本当に退会しますか？' },
+                            class: 'btn btn-danger' %>
+                        </td>
 
                     <% elsif @group_request.rejected? %>
                       <td class="text-nowrap">申請が拒否されました</td>

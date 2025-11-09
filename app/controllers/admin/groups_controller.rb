@@ -7,7 +7,7 @@ class Admin::GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @owner = Customer.find(@group.owner_id)
-    @group_approved = @group.group_requests.approved
+    @group_approved = @group.group_requests.approved.page(params[:page]).per(9)
   end
 
   def destroy

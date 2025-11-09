@@ -10,8 +10,8 @@ class Post < ApplicationRecord
 
   has_many_attached :images
 
-  validates :title, presence: true, length: { maximum: 100 }
-  validates :introduction, presence: true, length: { maximum: 2000 }
+  validates :title, presence: true, length: { maximum: 50 }
+  validates :introduction, presence: true, length: { maximum: 500 }
   validates :genre_id, presence: true
 
   scope :latest, -> {order(created_at: :desc)}

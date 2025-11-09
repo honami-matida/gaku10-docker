@@ -17,9 +17,11 @@ class Public::GroupRequestsController < ApplicationController
 
   def update
     @group_request = GroupRequest.find(params[:id])
+    @group = @group_request.group
 
     if params[:is_status] == 'approved'
       @group_request.update(is_status: 1)
+      @group.group_users.find_or_create_by(customer_id: @group_request.customer_id)
       flash[:notice] = "申請を承認しました"
     elsif params[:is_status] == 'rejected'
       @group_request.update(is_status: 2)
@@ -32,15 +34,17 @@ class Public::GroupRequestsController < ApplicationController
   def destroy
     @group = Group.find(params[:group_id])
     @group_request = @group.group_requests.find_by(customer: current_customer, is_status: [:approved])
+    @group_user = @group.group_users.find_by(customer_id: current_customer.id)
 
     if @group_request
       @group_request.destroy
-      flash[:notice] = "グループから退会しました"
+      @group_user&.destroy
+      flash[:notice] = "グループから退出しました"
     else
-      flash[:alert] = "退会に失敗しました"
+      flash[:alert] = "退出に失敗しました"
     end
 
-    redirect_to public_groups_path
+    redirect_to public_group_path(@group)
   end
 
   private

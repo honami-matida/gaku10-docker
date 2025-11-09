@@ -28,6 +28,15 @@
           <p class="text-wrap py-3"><%= @post.introduction %></p>
         </div>
       </div>
+      <div class="row my-3">
+        <div class="col text-center">
+          <% if @post.images.attached? %>
+            <% @post.images.each do |image| %>
+              <%= image_tag image, class: "post-image" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
 
 
 

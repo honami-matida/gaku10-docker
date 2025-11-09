@@ -3,45 +3,44 @@
 </div>
 
 <div class="container">
-  <div class="row">
-    <div class="col">
-      <table class="table table-borderless">
+  <div class="row justify-content-center">
+    <div class="col col-md-8">
 
-          <tr>
-            <td class="text-nowrap">
-              コメント日時:
-            </td>
-            <td>
-              <%= @post_comment.created_at.strftime("%Y/%m/%d %H:%M:%S") %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              コメント:
-            </td>
-            <td>
-              <%= @post_comment.comment %>
-            </td>
-          </tr>
-          <tr>
-            <td>会員:</td>
-            <td>
-              <%= image_tag @post_comment.customer.get_profile_image(50,50), class:"icon" %>
+      <table class="table table-bordered bg-white">
+        <tr>
+          <th class="text-nowrap bg-light" style="width: 150px;">
+            コメント日時:
+          </th>
+          <td>
+            <%= @post_comment.created_at.strftime("%Y/%m/%d %H:%M:%S") %>
+          </td>
+        </tr>
 
-              <%= link_to admin_customer_path(@post_comment.customer), class:"offset-1" do %>
-                <%= @post_comment.customer.name %>
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
-              <%= link_to "削除する", admin_post_comment_path(@post_comment), method: :delete, class:"btn btn-danger ml-3" %>
-            </td>
-          </tr>
+        <tr>
+          <th class="bg-light">
+            コメント:
+          </th>
+          <td>
+            <%= @post_comment.comment %>
+          </td>
+        </tr>
 
+        <tr>
+          <th class="bg-light">会員:</th>
+          <td>
+            <%= image_tag @post_comment.customer.get_profile_image(50,50), class:"icon" %>
 
+            <%= link_to admin_customer_path(@post_comment.customer), class:"offset-1" do %>
+              <%= @post_comment.customer.name %>
+            <% end %>
+          </td>
+        </tr>
       </table>
+
+      <div class="text-center mt-4">
+        <%= link_to "削除する", admin_post_comment_path(@post_comment), method: :delete, data:{confirm: "本当に削除しますか？"}, class:"btn btn-danger px-4" %>
+      </div>
+
     </div>
   </div>
 </div>

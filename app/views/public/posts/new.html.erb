@@ -7,7 +7,7 @@
     <div class="mx-auto">
       <div class="row py-3 ">
         <div class="col">
-          <%= form_with model: @post, url: public_posts_path do |f| %>
+          <%= form_with model: @post, url: public_posts_path, local: true  do |f| %>
             <h5>タイトル</h5>
             <%= f.text_field :title, rows:'4',cols:'50', class: "text-area row mx-auto" %>
             <h5 class="mt-3">本文</h5>

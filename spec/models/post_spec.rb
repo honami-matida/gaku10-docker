@@ -26,12 +26,12 @@ RSpec.describe Post, type: :model do
     end
 
     it '本文が2000文字以内であれば有効である' do
-      post.introduction = "あ" * 2000
+      post.introduction = "あ" * 500
       expect(post).to be_valid
     end
 
     it '本文が2001文字以上の場合は無効である' do
-      post.introduction = "あ" * 2001
+      post.introduction = "あ" * 501
       expect(post).to_not be_valid
     end
   end

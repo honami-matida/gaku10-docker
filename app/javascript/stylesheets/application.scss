@@ -28,8 +28,16 @@ footer {
   word-wrap: break-word;
 }
 
+/* テーブル見やすさ */
+.table th {
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+/* テーブル見やすさ */
 table td {
   word-break : break-all;
+  vertical-align: middle;
 }
 
 .flame-border{
@@ -89,4 +97,65 @@ table td {
   white-space: nowrap;
   vertical-align: baseline;
   border-radius: .25em;
+}
+
+/* フラッシュメッセージ */
+#comment_flash_area {
+  position: fixed;
+  top: 60px; /* ヘッダーの下あたり */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  width: auto;
+  max-width: 80%;
+  text-align: center;
+  pointer-events: none; /* クリックを邪魔しない */
+}
+
+.flash-message.notice {
+  background: #e1f5ff;
+  color: #0077aa;
+  border: 1px solid #8bd7f7;
+  border-radius: 6px;
+  padding: 10px 20px;
+  display: inline-block;
+  font-weight: bold;
+  animation: slideDown 0.45s ease-out;
+}
+
+/* スライドで降りてくるアニメーション */
+@keyframes slideDown {
+  0%   { opacity: 0; transform: translateY(-10px); }
+  20%  { opacity: 1; transform: translateY(0); }
+}
+
+/* 画像縦横比 保持 */
+.post-image {
+  width: 100%;
+  max-width: 500px;  /* 最大幅 */
+  height: auto;      /* ←縦横比を保つ */
+  object-fit: contain; /* 画像を縮小して全体を表示 */
+  display: block;
+  display: block;      /* ← 画像をブロック要素に */
+  margin-left: auto;   /* ← 中央寄せ */
+  margin-right: auto;  /* ← 中央寄せ */
+}
+
+/* ボタン色「新規登録へ」 */
+.btn-round {
+  display: inline-block;
+  color: #93b3ca;
+  background: transparent;
+  border: 2px solid #93b3ca;
+  border-radius: 100vh;
+  padding: 6px 20px;     
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.btn-round:hover {
+  background: #7fa5be;
+  border-color: #7fa5be;
+  color: #fff;
 }

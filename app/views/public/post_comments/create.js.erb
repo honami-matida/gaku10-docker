@@ -1,2 +1,16 @@
-$('#comment_index').html("<%= j(render 'public/post_comments/index',  post: @post, post_comments: @post_comments ) %>");
-$('#comment_textarea').val("");
+<% if @post_comment.errors.any? %>
+  // エラーがある場合（失敗時）
+  $("#comment_error_area").html("<%= j(render 'public/shared/error_messages', resource: @post_comment) %>");
+<% else %>
+  // 成功時
+  $('#comment_index').html("<%= j(render 'public/post_comments/index',  post: @post, post_comments: @post_comments ) %>");
+  $('#comment_textarea').val("");
+  $("#comment_error_area").html(""); // エラー消す
+
+  // フラッシュ表示
+  $("#comment_flash_area").html("<div class='flash-message notice'>コメントを投稿しました</div>");
+  setTimeout(function() {
+    $("#comment_flash_area .flash-message").fadeOut(800);
+  }, 2000);
+
+<% end %>

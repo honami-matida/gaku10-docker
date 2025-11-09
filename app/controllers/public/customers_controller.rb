@@ -51,7 +51,7 @@ class Public::CustomersController < ApplicationController
 
   def authenticate_customer!
     unless customer_signed_in?
-      flash[:alert] = "ログインが必要です。"
+      flash[:alert] = "ログインが必要です"
       redirect_to root_path
     end
   end
@@ -63,13 +63,13 @@ class Public::CustomersController < ApplicationController
   def ensure_current_customer
     customer = Customer.find(params[:id])
     if current_customer != customer
-      redirect_to public_customer_path(current_customer), alert: '他のユーザーのプロフィールを編集することはできません。'
+      redirect_to public_customer_path(current_customer), alert: '他のユーザーのプロフィールを編集することはできません'
     end
   end
 
   def ensure_guest_customer
     if current_customer.guest_customer?
-      redirect_to public_customer_path(current_customer) , notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+      redirect_to public_customer_path(current_customer) , notice: "ゲストユーザーはプロフィール編集画面へ遷移できません"
     end
   end
 end

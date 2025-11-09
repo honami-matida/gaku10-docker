@@ -64,6 +64,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 
+#バリデーションを日本語化
+gem 'rails-i18n', '~> 6.0'
+gem 'devise-i18n'
+
 #本番MySQL 開発環境もMySQLで統一
 #gem 'dotenv-rails'
 #group :production do
