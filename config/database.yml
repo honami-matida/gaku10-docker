@@ -11,7 +11,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV['MYSQL_USER'] %> #追記
   password: <%= ENV['MYSQL_PASSWORD'] %> #追記
-  host: <%= ENV['MYSQL_HOST'] %> #追記
+  host: <%= ENV['DB_HOST'] %> #本番環境用
   timeout: 5000
 
 development:
