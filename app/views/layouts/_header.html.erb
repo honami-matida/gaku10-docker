@@ -109,9 +109,6 @@
                 <%= link_to "ジャンル一覧", public_genres_path, class: "text-dark" %>
               </li>
               <li class="navbar-brand pr-4 border-right">
-                <%= link_to "About", about_path, class: "text-dark" %>
-              </li>
-              <li class="navbar-brand pr-4 border-right">
                 <%= link_to "いいね一覧", favorites_public_customer_path(current_customer.id), class: "text-dark" %>
               </li>
             <% elsif admin_signed_in? %>
@@ -130,8 +127,8 @@
               </li>
             <% else %>
               <!-- ログインしていない時 -->
-              <li class="navbar-brand pr-4">
-                <%= link_to "About", about_path, class: "text-dark"  %>
+              <li class="navbar-brand pr-4 border-right">
+                
               </li>
             <% end %>
           </ul>

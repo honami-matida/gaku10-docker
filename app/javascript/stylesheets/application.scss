@@ -159,3 +159,50 @@ table td {
   border-color: #7fa5be;
   color: #fff;
 }
+
+/* 背景 */
+.top-hero {
+  position: relative;
+  overflow: hidden;
+
+}
+
+/* 紙飛行機 */
+.paper-plane {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+
+  background-image: url("/assets/logo_gray.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+
+  z-index: -1;
+  pointer-events: none;
+
+  animation: fly-plane 9s linear forwards;
+  opacity: 0;
+}
+
+/* 飛行アニメーション */
+@keyframes fly-plane {
+  0% {
+    transform: translate(100%, -80%) rotate(10deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate(0%, 0%) rotate(2deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-100%, 80%) rotate(-12deg);
+    opacity: 0;
+  }
+}

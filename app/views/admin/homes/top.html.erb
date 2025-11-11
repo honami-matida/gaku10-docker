@@ -5,6 +5,13 @@
 <div class="container">
   <div class="row py-3">
 
+    <div class="col">
+      <div class="row justify-content-end">
+        <%= link_to '新しい順', admin_root_path(latest: "true") %>
+        |<%= link_to '古い順', admin_root_path(old: "true") %>
+        |<%= link_to '人気順', admin_root_path(favorite_count: "true") %>
+      </div>
+    </div>
     <table class="table table-hover table-inverse">
       <thead>
         <tr>
