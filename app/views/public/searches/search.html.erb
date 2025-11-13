@@ -76,6 +76,38 @@
           <%= paginate @records, theme: 'bootstrap-5', class:"text-center" %>
         </div>
 
+      <% elsif @model == 'group' %>
+        <h3>グループ検索結果 "<%= @word %>"</h3>
+
+        <table class="table table-hover table-inverse">
+          <thead>
+            <tr>
+              <th>アイコン</th>
+              <th>グループ名</th>
+              <th>紹介文</th>
+              <th>ジャンル</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @records.each do |group| %>
+              <tr>
+                <td>
+                  <%= link_to public_group_path(group) do %>
+                    <%= image_tag group.get_group_image(50,50), class:"icon" %>
+                  <% end %>
+                </td>
+                <td><%= link_to group.name, public_group_path(group) %></td>
+                <td><%= truncate(group.introduction, length: 40) %></td>
+                <td><%= group.genre.name %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <div class="mx-auto">
+          <%= paginate @records, theme: 'bootstrap-5', class:"text-center" %>
+        </div>
+
       <% else %>
         <p>検索結果がありません。</p>
       <% end %>
