@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const mid = scroll + window.innerHeight / 2;  // ← ★ここで必ず先に定義！
 
     // ===== 画像固定 =====
-    if (mid >= wrapperTop && mid <= wrapperBottom) {
+    if (mid >= wrapperTop /*&& mid <= wrapperBottom*/) {
       illustration.classList.add("fixed");
     } else {
       illustration.classList.remove("fixed");
