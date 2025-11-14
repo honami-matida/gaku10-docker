@@ -73,6 +73,18 @@
                   <i class="fa-solid fa-arrow-right-from-bracket "></i>
                 <% end %>
               </li>
+
+              <div class="search_form mr-3">
+                <%= form_with url: admin_search_path, method: :get, local: true do |f| %>
+                  <%= f.text_field :word, placeholder: "検索ワード", class: "form-control d-inline-block", style:"width:200px;" %>
+                  <%= f.select :model,
+                        options_for_select([['投稿', 'post'], ['会員', 'customer'], ['コメント', 'comment']]),
+                        {}, class: "form-control d-inline-block", style:"width:120px;" %>
+                  <%= button_tag type: "submit", class: "btn btn-secondary" do %>
+                    <i class="fas fa-search"></i>
+                  <% end %>
+                <% end %>
+              </div>
             <% else %>
               <!-- ログインしていない時 -->
               <li class="nav-item mx-2">
