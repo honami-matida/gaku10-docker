@@ -8,8 +8,11 @@ class Public::SearchesController < ApplicationController
     # 選択したモデルに応じて検索を実行
     if @model  == "customer"
       @records = Customer.search_for(@word).page(params[:page]).per(9)
-    else
+    elsif @model == "post"
       @records = Post.search_for(@word).page(params[:page]).per(9)
+    elsif @model == "group"
+      @records = Group.search_for(@word).page(params[:page]).per(9)
+      
     end
   end
 

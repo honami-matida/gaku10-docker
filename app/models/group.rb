@@ -19,6 +19,11 @@ class Group < ApplicationRecord
     group_image.variant(resize_to_limit: [width, height]).processed
   end
 
+  #グループ検索機能
+  def self.search_for(word)
+    where("name LIKE ? OR introduction LIKE ?", "%#{word}%", "%#{word}%")
+  end
+
   # def is_owned_by?(customers)
   #   owner.id == customers.id
   # end

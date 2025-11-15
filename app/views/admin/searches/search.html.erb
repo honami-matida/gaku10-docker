@@ -1,2 +1,81 @@
-<h1>Admin::Searches#search</h1>
-<p>Find me in app/views/admin/searches/search.html.erb</p>
+<h2 class="mb-4">検索結果：「<%= @word %>」</h2>
+
+<% if @model == "post" %>
+  <h3 class="mb-3">投稿</h3>
+
+  <table class="table table-bordered table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th>ID</th>
+        <th>タイトル</th>
+        <th>投稿者</th>
+        <th>本文（冒頭）</th>
+        <th>投稿日</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @posts.each do |post| %>
+        <tr>
+          <td><%= post.id %></td>
+          <td><%= link_to post.title, admin_post_path(post) %></td>
+          <td><%= post.customer.name %></td>
+          <td><%= truncate(post.introduction, length: 25) %></td>
+          <td><%= post.created_at.strftime("%Y/%m/%d") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
+<% elsif @model == "customer" %>
+  <h3 class="mb-3">会員</h3>
+
+  <table class="table table-bordered table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th>ID</th>
+        <th>名前</th>
+        <th>Email</th>
+        <th>登録日</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @customers.each do |customer| %>
+        <tr>
+          <td><%= customer.id %></td>
+          <td><%= link_to customer.name, admin_customer_path(customer) %></td>
+          <td><%= customer.email %></td>
+          <td><%= customer.created_at.strftime("%Y/%m/%d") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
+<% elsif @model == "comment" %>
+  <h3 class="mb-3">コメント</h3>
+
+  <table class="table table-bordered table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th>ID</th>
+        <th>コメント</th>
+        <th>投稿タイトル</th>
+        <th>会員名</th>
+        <th>日時</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @comments.each do |comment| %>
+        <tr>
+          <td><%= comment.id %></td>
+          <td><%= truncate(comment.comment, length: 25) %></td>
+          <td><%= link_to comment.post.title, admin_post_path(comment.post) %></td>
+          <td><%= comment.customer.name %></td>
+          <td><%= comment.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% end %>

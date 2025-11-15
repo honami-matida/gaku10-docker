@@ -1,12 +1,19 @@
-<div class="container">
-  <div class="row py-5">
-    <div class='mx-auto col-11 col-sm-10 col-lg-8 col-xl-6'>
-      <div class="row mx-auto">
-        <h1 class="mx-auto py-5">ようこそ  <strong>がく10</strong>  へ!!</h1>
-        <p class="mx-auto"><strong>がく10</strong>は学童の先生同士で交流できるコミュニティサイトです</p>
-        <p class="mx-auto">遊びのアイディアから、支援するなかで気になったこと、みんなの声を共有しませんか？</p>
-      </div  class="row">
-        <div class="btn-wrapper col-10 mx-auto">
+<div class="top-hero">
+  <div class="paper-plane"></div>
+
+  <div class="container">
+    <div class="row py-5">
+      <div class='mx-auto col-11 col-sm-10 col-lg-8 col-xl-6'>
+        <div class="row mx-auto">
+          <h1 class="mx-auto py-5">ようこそ  <strong>がく10</strong>  へ!!</h1>
+          <p class="mx-auto"><strong>がく10</strong>は学童の先生同士で交流できるコミュニティサイトです</p>
+          <p class="mx-auto text-center">
+            遊びのアイディアから、支援するなかで気になったこと、</br>
+            みんなの声を共有しませんか？
+          </p>
+          <div class="my-5" style="height: 5px;"></div>
+        </div >
+        <div class="btn-wrapper col-8 mx-auto">
           <div class="row">
             <%= link_to 'ログイン',new_customer_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" %>
           </div>
@@ -17,7 +24,9 @@
             <%= link_to 'ゲストログイン（閲覧用）' ,customers_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
           </div>
         </div>
+
+        <%= render 'public/homes/about' %>
+        
       </div>
     </div>
   </div>
-</div>

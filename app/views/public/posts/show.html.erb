@@ -60,7 +60,7 @@
         <div class="m-3">
           <% unless current_customer.guest_customer? %>
             <%= form_with model: [@post, @post_comment], local: false, url: public_post_post_comments_path(@post, @post_comment), method: :post do |f| %>
-              <%= f.text_area :comment, rows:'4',cols:'50', placeholder: "コメントをここに入力して下さい", class: "text-area row mx-auto", id: "comment_textarea" %>
+              <%= f.text_area :comment, rows:'4',cols:'50', placeholder: "コメントをここに入力して下さい", class: "form-control", id: "comment_textarea" %>
               <div class="submit-btn">
                 <%= f.submit "送信する", class: "btn btn-info my-3 " %>
               </div>
