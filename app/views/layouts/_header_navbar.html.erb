@@ -1,0 +1,45 @@
+<header class="shadow-sm">
+  <nav class="navbar navbar-light bg-light">
+    <div class="container">
+        <div class="mx-auto">
+            <ul class="mb-0 d-flex align-items-center list-unstyled text-nowrap">
+                <% if customer_signed_in? %>
+
+                    <!--会員がログインしている時 -->
+                    <li class="navbar-brand pr-4 border-right" >
+                        <%= link_to "会員一覧", list_public_customers_path, class: "text-dark" %>
+                    </li>
+                    <li class="navbar-brand pr-4 border-right" >
+                        <%= link_to "グループ一覧", public_groups_path, class: "text-dark" %>
+                    </li>
+                    <li class="navbar-brand pr-4 border-right">
+                        <%= link_to "ジャンル一覧", public_genres_path, class: "text-dark" %>
+                    </li>
+                    <li class="navbar-brand pr-4 border-right">
+                        <%= link_to "いいね一覧", favorites_public_customer_path(current_customer.id), class: "text-dark" %>
+                    </li>
+                <% elsif admin_signed_in? %>
+                    <!-- 管理者がログインしている時 -->
+                    <li class="navbar-brand pr-4 border-right">
+                        <%= link_to "会員一覧", admin_customers_path, class: "text-dark" %>
+                    </li>
+                    <li class="navbar-brand pr-4 border-right">
+                        <%= link_to "グループ一覧", admin_groups_path, class: "text-dark" %>
+                    </li>
+                    <li class="navbar-brand pr-4 border-right">
+                        <%= link_to "ジャンル一覧", admin_genres_path, class: "text-dark" %>
+                    </li>
+                    <li class="navbar-brand pr-4 border-right">
+                        <%= link_to "コメント一覧", admin_post_comments_path, class: "text-dark" %>
+                    </li>
+                <% else %>
+                    <!-- ログインしていない時 -->
+                    <li class="navbar-brand pr-4 border-right">
+                    </li>
+                    
+                <% end %>
+            </ul>
+        </div>
+    </div>
+  </nav>
+</header>
