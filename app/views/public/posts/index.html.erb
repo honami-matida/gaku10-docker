@@ -40,16 +40,16 @@
             <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
             <td><%#= render "favorites/btn", book: book %></td>
             <td>
-              <i class="fa-regular fa-comment-dots" style="color: #7d7d7d"></i>
+              <i class="fa-regular fa-comment-dots like-icon"></i>
               <%= post.post_comments.count %>
             </td>
             <td>
-              <i class="fa-regular fa-heart" style="color: #7d7d7d"></i>
+              <i class="fa-regular fa-heart like-icon"></i>
               <%= post.favorites.count %>
             </td>
           </tr>
-         <% end %>
-       </tbody>
+        <% end %>
+      </tbody>
     </table>
 
     <div class="mx-auto">

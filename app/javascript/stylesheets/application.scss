@@ -1,3 +1,7 @@
+/*************************************
+ * 1. Bootstrap 読み込み / RESET
+ *************************************/
+
 @use '~bootstrap/scss/bootstrap';
 
 * {
@@ -6,15 +10,16 @@
   box-sizing: border-box;
 }
 
-footer {
-  background-color: #93b3ca;
+/*************************************
+ * 2. 共通ユーティリティ
+ *************************************/
+
+ .text-wrap {
+  word-wrap: break-word;
 }
 
-.profile_icon {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 50%;
+.text-area{
+  width: 100%;
 }
 
 .icon{
@@ -24,29 +29,52 @@ footer {
   border-radius: 50%;
 }
 
-.text-wrap {
-  word-wrap: break-word;
+.profile_icon {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
-/* テーブル見やすさ */
+/* post-index ハート色 */
+.like-icon {
+  color: #7d7d7d;
+}
+
+/*************************************
+ * 3. テーブル（一覧の見やすさ）
+ *************************************/
+
 .table th {
   font-weight: 600;
   vertical-align: middle;
 }
 
-/* テーブル見やすさ */
 table td {
   word-break : break-all;
   vertical-align: middle;
 }
 
-.flame-border{
-  border: solid;
-  border-radius: 8px;
-  border-color: #93b3ca;
+/*************************************
+ * 5. 画像関連
+ *************************************/
+
+.post-image {
+  width: 100%;
+  max-width: 500px;  /* 最大幅 */
+  height: auto;      /* ←縦横比を保つ */
+  object-fit: contain; /* 画像を縮小して全体を表示 */
+  display: block;
+  display: block;      /* ← 画像をブロック要素に */
+  margin-left: auto;   /* ← 中央寄せ */
+  margin-right: auto;  /* ← 中央寄せ */
 }
 
-.search-btn{
+/*************************************
+ * 6. ボタンデザイン
+ *************************************/
+
+ .search-btn{
   text-align: center;
   color: #fff;
   background: #93b3ca;
@@ -75,14 +103,33 @@ table td {
   padding: 4px 0px 4px 0px;
 }
 
-.text-area{
-  width: 100%;
+/* ボタン色「新規登録へ」 */
+.btn-round {
+  display: inline-block;
+  color: #93b3ca;
+  background: transparent;
+  border: 2px solid #93b3ca;
+  border-radius: 100vh;
+  padding: 6px 20px;     
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.btn-round:hover {
+  background: #7fa5be;
+  border-color: #7fa5be;
+  color: #fff;
 }
 
 .submit-btn{
   color: #fff;
   float: right;
 }
+
+/*************************************
+ * 7. ラベル
+ *************************************/
 
 .label {
   background-color: #337ab7;
@@ -99,7 +146,45 @@ table td {
   border-radius: .25em;
 }
 
-/* フラッシュメッセージ */
+/*************************************
+ * 8. フレーム / 装飾
+ *************************************/
+ .flame-border {
+  border: solid;
+  border-radius: 8px;
+  border-color: #93b3ca;
+}
+
+/*************************************
+ * 9. ソートリンク
+ *************************************/
+
+.sort-links a {
+  text-decoration: none;
+  color: #45728f;
+  font-weight: 500;
+  margin: 0 6px;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+}
+
+.sort-links a:hover {
+  border-color: #fea06d;
+  color: #fea06d;
+}
+
+/*************************************
+ * 10. フッター
+ *************************************/
+
+footer {
+  background-color: #93b3ca;
+}
+
+/*************************************
+ * 11. フラッシュメッセージ（コメント用）
+ *************************************/
+
 #comment_flash_area {
   position: fixed;
   top: 60px; /* ヘッダーの下あたり */
@@ -129,37 +214,9 @@ table td {
   20%  { opacity: 1; transform: translateY(0); }
 }
 
-/* 画像縦横比 保持 */
-.post-image {
-  width: 100%;
-  max-width: 500px;  /* 最大幅 */
-  height: auto;      /* ←縦横比を保つ */
-  object-fit: contain; /* 画像を縮小して全体を表示 */
-  display: block;
-  display: block;      /* ← 画像をブロック要素に */
-  margin-left: auto;   /* ← 中央寄せ */
-  margin-right: auto;  /* ← 中央寄せ */
-}
-
-/* ボタン色「新規登録へ」 */
-.btn-round {
-  display: inline-block;
-  color: #93b3ca;
-  background: transparent;
-  border: 2px solid #93b3ca;
-  border-radius: 100vh;
-  padding: 6px 20px;     
-  text-decoration: none;
-  font-weight: 500;
-  transition: 0.2s;
-}
-
-.btn-round:hover {
-  background: #7fa5be;
-  border-color: #7fa5be;
-  color: #fff;
-}
-
+/*************************************
+ * 12. 紙飛行機アニメーション（hero）
+ *************************************/
 /* 背景 */
 .top-hero {
   position: relative;
@@ -207,7 +264,9 @@ table td {
   }
 }
 
-/* ===== About: レイアウト＆アニメーション ===== */
+/*************************************
+ * 13. About セクション（スクロール演出）
+ *************************************/
 /* 全体のスクロール高さ（4ブロック分） */
 .wrapper {
   position: relative;
@@ -215,7 +274,7 @@ table td {
   margin-bottom: 80px; /* ← footer と重ならない距離をつける */
   min-height: 100vh;
 }
-.text-area {
+.about-text-area {
   position: relative;
   width: 45%;
   padding-right: 30px;
@@ -250,17 +309,3 @@ table td {
   max-width: 380px;
 }
 
-/* リンク人気順見た目 */
-.sort-links a {
-  text-decoration: none;
-  color: #45728f;
-  font-weight: 500;
-  margin: 0 6px;
-  border-bottom: 1px solid transparent;
-  padding-bottom: 2px;
-}
-
-.sort-links a:hover {
-  border-color: #fea06d;
-  color: #fea06d;
-}

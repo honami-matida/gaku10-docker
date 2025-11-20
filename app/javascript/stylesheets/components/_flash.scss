@@ -1,0 +1,25 @@
+#comment_flash_area {
+  position: fixed;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  max-width: 80%;
+  text-align: center;
+  pointer-events: none;
+}
+
+.flash-message.notice {
+  background: #e1f5ff;
+  color: #0077aa;
+  border: 1px solid #8bd7f7;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-weight: bold;
+  animation: slideDown 0.45s ease-out;
+}
+
+@keyframes slideDown {
+  0%   { opacity: 0; transform: translateY(-10px); }
+  20%  { opacity: 1; transform: translateY(0); }
+}
