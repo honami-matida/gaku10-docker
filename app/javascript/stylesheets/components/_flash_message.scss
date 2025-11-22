@@ -1,12 +1,14 @@
+
 #comment_flash_area {
   position: fixed;
-  top: 60px;
+  top: 60px; /* ヘッダーの下あたり */
   left: 50%;
   transform: translateX(-50%);
   z-index: 2000;
+  width: auto;
   max-width: 80%;
   text-align: center;
-  pointer-events: none;
+  pointer-events: none; /* クリックを邪魔しない */
 }
 
 .flash-message.notice {
@@ -15,10 +17,12 @@
   border: 1px solid #8bd7f7;
   border-radius: 6px;
   padding: 10px 20px;
+  display: inline-block;
   font-weight: bold;
   animation: slideDown 0.45s ease-out;
 }
 
+/* スライドで降りてくるアニメーション */
 @keyframes slideDown {
   0%   { opacity: 0; transform: translateY(-10px); }
   20%  { opacity: 1; transform: translateY(0); }
