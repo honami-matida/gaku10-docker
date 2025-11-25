@@ -1,17 +1,38 @@
-@use '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap';
 
-@use "base/reset";
-@use "base/utilitie";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-@use "components/button";
-@use "components/flash_message";
-@use "components/icon";
-@use "components/label";
-@use "components/soet_link";
+@import 'base/utilities';
 
-@use "layout/about";
-@use "layout/flame";
-@use "layout/footer";
-@use "layout/post_image";
-@use "layout/table";
-@use "layout/sort_links";
+@import 'components/button';
+
+@import 'components/flash_message';
+
+@import 'components/icon';
+
+@import 'components/sort_link';
+
+/* post-index ハート色 */
+.like-icon {
+  color: #7d7d7d;
+}
+
+@import 'components/label';
+
+@import 'components/sort_link';
+
+@import 'layouts/about';
+
+@import 'layouts/flame';
+
+@import 'layouts/footer';
+
+@import 'layouts/post_image';
+
+@import 'layouts/table';
+
+
