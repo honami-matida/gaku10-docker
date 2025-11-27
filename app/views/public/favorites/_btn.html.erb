@@ -7,7 +7,7 @@
   <% else %>
     <!--# 一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
     <%= link_to public_post_favorites_path(@post), method: :post, remote: true do %>
-      <span style="color:black;">いいね︎♡</span>
+      <div class="like-icon">いいね︎♡</div>
     <% end %>
   <% end %>
 <% end %>
