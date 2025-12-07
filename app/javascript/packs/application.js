@@ -11,7 +11,7 @@ import "jquery";
 import "popper.js";
 import "bootstrap";
 import "../stylesheets/application.scss";
-import "../about_scroll"
+
 
 
 Rails.start()
