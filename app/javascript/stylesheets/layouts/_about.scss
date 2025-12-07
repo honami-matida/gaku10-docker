@@ -3,94 +3,18 @@
  *************************************/
 /* 背景 */
 .top-hero {
+  background-color: #5EAC89;
   position: relative;
   overflow: hidden;
 
 }
 
-/* 紙飛行機 */
-.paper-plane {
-  position: absolute;
-  width: 700px;
-  height: 700px;
-
-  background-image: url("/assets/logo_gray.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-
-  left: 50%;
-  top: 10%;
-  transform: translate(-50%, -50%);
-
-  z-index: -1;
-  pointer-events: none;
-
-  animation: fly-plane 9s linear forwards;
-  opacity: 0;
+.text-block{
+  padding: 64px;
+  display: inline-block;
 }
 
-/* 飛行アニメーション */
-@keyframes fly-plane {
-  0% {
-    transform: translate(100%, -80%) rotate(10deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  50% {
-    transform: translate(0%, 0%) rotate(2deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-100%, 80%) rotate(-12deg);
-    opacity: 0;
-  }
-}
-
-
-/*************************************
- * 13. About セクション（スクロール演出）
- *************************************/
-/* 全体のスクロール高さ（4ブロック分） */
-.wrapper {
-  position: relative;
-  margin-top: 800px; /* ← ログインボタンと重ならない距離をつける */
-  margin-bottom: 80px; /* ← footer と重ならない距離をつける */
-  min-height: 100vh;
-}
-.about-text-area {
-  position: relative;
-  width: 45%;
-  padding-right: 30px;
-}
-.text-block {
-  margin-bottom: 300px;
-}
-
-.text-block.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* デフォルト（固定されていない） */
-.illustration-area {
-  position: absolute;
-  right: 5%;
-  width: 40%;
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-/* ピタッと止まる位置 */
-.illustration-area.fixed {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.illustration-area img {
+.about-back{
   width: 100%;
-  max-width: 380px;
+  background-color: #A8D577;
 }
-
