@@ -9,25 +9,44 @@
 
 }
 
+
 .text-block{
   padding: 64px;
   display: inline-block;
 }
 
 .about-back{
+  margin: 40px 64px;
   width: 100%;
   background-color: #A8D577;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+  
+  p{
+  color: rgba( 28, 53, 95, 0.55);
+  }
+}
+
+.tile{
+  background-color: #F2EED6;
+
 }
 
 .box{
-  display: inline-block;
-  width:200px;
-  height:100px;
+  margin: 0 auto;
+  padding-top: 24px;
+  border-top:1px solid rgba( 28, 53, 95, 0.15);
 }
 
 .box-container{
   padding: 120px 64px;
   background-color: #DFECB7;
-  text-align:  center;
-  
+  display: grid;
+  gap: 10px;
+  grid-template-columns: auto auto auto;
+
+  p{
+  color: rgba( 28, 53, 95, 0.55);
+  }
 }
