@@ -20,9 +20,10 @@
   width: 100%;
   background-color: #A8D577;
   display: grid;
-  gap: 10px;
+  gap: 64px;
   grid-template-columns: 1fr 1fr;
-  
+  margin: 0 auto;
+
   p{
   color: rgba( 28, 53, 95, 0.55);
   }
@@ -30,7 +31,10 @@
 
 .tile{
   background-color: #F2EED6;
-
+  border-radius: 16px;
+  width: 544px;
+  height: 432px;
+  margin: 0 auto;
 }
 
 .box{
