@@ -1,28 +1,27 @@
-<footer class="footer">
+<footer>
 
-  <div class="container">
-    <div class="row my-5">
-      <div class="col">
+  <div class="footer-container">
 
-        <!-- <p class="text-muted">Place sticky footer content here.</p> -->
-        <% unless admin_signed_in? %>
-          <div><%= link_to "利用規約", public_static_pages_terms_path, class: "text-muted" %></div>
-        <% else %>
-          <div><%= link_to "利用規約", admin_static_pages_terms_path, class: "text-muted" %></div>
+    <div class="footer-box">
+      <!-- <p class="text-muted">Place sticky footer content here.</p> -->
+      <% unless admin_signed_in? %>
+        <div><%= link_to "利用規約", public_static_pages_terms_path, class: "text-muted" %></div>
+      <% else %>
+        <div><%= link_to "利用規約", admin_static_pages_terms_path, class: "text-muted" %></div>
+      <% end %>
+
+      <div class="text-muted">
+        <% if customer_signed_in? || admin_signed_in? %>
+          <%= link_to "About", about_path, class: "text-muted" %>
         <% end %>
-
-        <div class="text-muted">
-          <% if customer_signed_in? || admin_signed_in? %>
-            <%= link_to "About", about_path, class: "text-muted" %>
-          <% end %>
-        </dov>
-
-      </div>
-      <div class="col">
-        <i class="fa-brands fa-instagram"></i>
-        <i class="fa-brands fa-x-twitter"></i>
-        <i class="fa-brands fa-square-facebook"></i>
       </div>
     </div>
+
+    <div class="footer-box-right">
+      <i class="fa-brands fa-instagram"></i>
+      <i class="fa-brands fa-x-twitter"></i>
+      <i class="fa-brands fa-square-facebook"></i>
+    </div>
+
   </div>
 </footer>
