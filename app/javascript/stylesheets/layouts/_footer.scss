@@ -1,4 +1,15 @@
-
-footer {
+.footer-container{
   background-color: #F2EED6;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+  padding: 64px;
+}
+
+.footer-box{
+
+}
+
+.footer-box-right{
+margin-left: auto;
 }
