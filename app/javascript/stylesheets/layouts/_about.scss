@@ -31,8 +31,18 @@
   }
 }
 
-.tile{
-  background-color: #F2EED6;
+.tile1{
+
+  background-image: url(/assets/tile1.png);
+  border-radius: 16px;
+  width: 544px;
+  height: 432px;
+  margin: 0 auto;
+}
+
+.tile2{
+
+  background-image: url(/assets/tile2.png);
   border-radius: 16px;
   width: 544px;
   height: 432px;
