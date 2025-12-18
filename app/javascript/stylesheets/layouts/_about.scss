@@ -3,7 +3,9 @@
  *************************************/
 /* 背景 */
 .top-hero {
-  background-color: #5EAC89;
+  
+  background-image: url(/assets/ground.png);
+  background-size: cover;
   position: relative;
   overflow: hidden;
 
@@ -16,7 +18,7 @@
 }
 
 .about-back{
-  padding: 40px 64px;
+  padding: 80px 64px;
   width: 100%;
   background-color: #A8D577;
   display: grid;
@@ -53,4 +55,8 @@
   p{
   color: rgba( 28, 53, 95, 0.55);
   }
+}
+
+.origami{
+  text-align: center;
 }
