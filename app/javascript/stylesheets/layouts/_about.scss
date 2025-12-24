@@ -24,10 +24,14 @@
     gap: 64px;
     grid-template-columns: 1fr 1fr;
     margin: 0 auto;
+  }
 
-    p{
+  h1,h2,h4{
+    color: rgba( 28, 53, 95, 1);
+  }
+
+  p{
     color: rgba( 28, 53, 95, 0.55);
-    }
   }
 
   .tile1,
