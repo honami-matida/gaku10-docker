@@ -24,10 +24,14 @@
     gap: 64px;
     grid-template-columns: 1fr 1fr;
     margin: 0 auto;
+  }
 
-    p{
+  h1,h2,h4{
+    color: rgba( 28, 53, 95, 1);
+  }
+
+  p{
     color: rgba( 28, 53, 95, 0.55);
-    }
   }
 
   .tile1,
@@ -75,8 +79,9 @@
 }
 
 
-@media (max-width: 800px) {
+@media (max-width: 1289px) {
   .about-back{
+    display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     margin: 0 auto;
@@ -86,21 +91,21 @@
       color: rgba( 28, 53, 95, 0.55);
     }
   }
-  .tile1
+  .tile1,
   .tile2{
   grid-column: 1;
   grid-row: auto;
   }
   .tile1{
-    order: 0;
-  }
-  .tile2{
     order: 1;
   }
-  .tile3{
-    order: 3;
+  .tile2{
+    order: 2;
   }
   .tile4{
-    order: 2;
+    order: 3;
+  }
+  .tile3{
+    order: 4;
   }
 }
