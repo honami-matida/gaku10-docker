@@ -6,8 +6,7 @@ RUN apt-get update -qq && apt-get install -y \
     git \
     build-essential \
     libpq-dev \
-    # MySQL クライアントを Dockerfile に追加
-    **default-mysql-client** \ 
+    default-mysql-client \
     && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs \
     && npm install -g yarn
@@ -22,10 +21,15 @@ COPY . /app
 RUN gem install bundler -v 2.4.19
 RUN bundle install
 
+# Node.js の OpenSSL 互換設定
+ENV NODE_OPTIONS=--openssl-legacy-provider
+
+# JS/CSS アセットをコンパイル
+RUN yarn install
+RUN SECRET_KEY_BASE=dummy RAILS_ENV=production bundle exec rails webpacker:compile
+
 # ポートを開放
 EXPOSE 3000
 
 # デフォルトコマンド
 CMD ["rails", "server", "-b", "0.0.0.0"]
-
-ENV NODE_OPTIONS=--openssl-legacy-provider
