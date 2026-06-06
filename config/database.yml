@@ -27,5 +27,13 @@ test:
   database: gaku10_test  # テスト用DB名
 
 production:
-  <<: *default
-  database: <%= ENV['MYSQL_DATABASE'] %> #MYSQLに統一
+  adapter: mysql2
+  encoding: utf8mb4
+  collation: utf8mb4_general_ci
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV['MYSQLUSER'] %>
+  password: <%= ENV['MYSQLPASSWORD'] %>
+  host: <%= ENV['MYSQLHOST'] %>
+  port: <%= ENV['MYSQLPORT'] %>
+  database: <%= ENV['MYSQLDATABASE'] %>
+  timeout: 5000
