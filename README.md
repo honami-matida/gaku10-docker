@@ -4,7 +4,7 @@
 学童の先生同士で交流できるコミュニティサイト
 
 ## URL
-本番環境：http://13.159.207.183/
+本番環境：https://gaku10-docker-production.up.railway.app
 
 ## デモログイン
 一般ユーザー:  
@@ -14,7 +14,7 @@ Password: macchan
 管理ユーザー: <br>
 Email: 123@456  
 Password: 123456 <br>
-管理画面URL: [http://admin/sign_in](http://13.159.207.183/admin/sign_in)
+管理画面URL: [https://gaku10-docker-production.up.railway.app/admin/sign_in](https://gaku10-docker-production.up.railway.app/admin/sign_in)
 
 ## 画面イメージ
 <p align="center">
@@ -159,9 +159,9 @@ Password: 123456 <br>
 |---|---|
 | 言語 | Ruby 3.1.2 / JavaScript / SQL |
 | フレームワーク | Ruby on Rails 6.1.7.8 |
-| インフラ | AWS EC2 |
-| Webサーバ | Nginx + Puma |
-| DB | MySQL 5.7（本番 / CI / 開発すべて共通） |
+| インフラ | Railway |
+| Webサーバ | Puma |
+| DB | MySQL（本番: Railway管理 / 開発: Docker） |
 | 開発環境 | Docker / docker-compose |
 | CI | GitHub Actions + RSpec（現在拡張中） |
 
@@ -190,7 +190,7 @@ Password: 123456 <br>
 - Ruby / Rails / MySQL バージョン差異の解消
 - Rails credentials / .env による環境変数管理
 - GitHub Actions を使用した CI パイプラインの導入
-- AWS EC2 + Nginx + Puma による本番運用構成を構築
+- Railway + Puma による本番運用構成を構築
 
 ## 設計書
 
