@@ -45,3 +45,4 @@ yarn-debug.log*
 # macOS system files
 .DS_Store
 /config/credentials/production.key
+/decrypted.yml
