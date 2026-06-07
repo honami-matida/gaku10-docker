@@ -15,11 +15,11 @@ class Customer < ApplicationRecord
   has_one_attached :profile_image
 
   def get_profile_image(width, height)
-    unless profile_image.attached?
-      file_path = Rails.root.join('app/assets/images/default-image.jpg')
-      profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'profile_image/jpeg')
-    end
+    return 'default-image.jpg' unless profile_image.attached?
     profile_image.variant(resize_to_limit: [width, height]).processed
+  rescue
+    profile_image.purge
+    'default-image.jpg'
   end
 
   validates :name, presence: true, length: { minimum: 1, maximum: 30 }
