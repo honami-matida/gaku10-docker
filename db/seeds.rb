@@ -5,69 +5,81 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Admin.create!(email: '123@456', password: '123456')
+Admin.find_or_create_by!(email: '123@456') { |a| a.password = '123456' }
+
+# ファイルが消えていれば再添付するヘルパー
+attach_image = lambda do |customer, filename|
+  if customer.profile_image.attached?
+    return if ActiveStorage::Blob.service.exist?(customer.profile_image.blob.key)
+    customer.profile_image.purge
+  end
+  customer.profile_image.attach(
+    io: File.open(Rails.root.join('app/assets/images', filename)),
+    filename: filename,
+    content_type: 'image/png'
+  )
+end
 
 #　顧客の作成
-Customer.find_or_create_by!(email: "mattchan@example.com") do |customer|
-  customer.name = "まっちゃん"
-  customer.password = 'macchan'
-  customer.profile_image.attach(io: File.open(Rails.root.join('app/assets/images/profile-image_1.png')), filename: 'profile-image_1.png')
+customer = Customer.find_or_create_by!(email: "mattchan@example.com") do |c|
+  c.name = "まっちゃん"
+  c.password = 'macchan'
 end
+attach_image.call(customer, 'profile-image_1.png')
 
-Customer.find_or_create_by!(email: "camp@example.com") do |customer|
-  customer.name = "自然キャンプ@子ども生きる力プロジェクト"
-  customer.password = 'camp2024!'
-  customer.profile_image.attach(io: File.open(Rails.root.join('app/assets/images/profile-image_2.png')), filename: 'profile-image_2.png')
+customer = Customer.find_or_create_by!(email: "camp@example.com") do |c|
+  c.name = "自然キャンプ@子ども生きる力プロジェクト"
+  c.password = 'camp2024!'
 end
+attach_image.call(customer, 'profile-image_2.png')
 
-Customer.find_or_create_by!(email: "yuzu@example.com") do |customer|
-  customer.name = "yuzu sibadog"
-  customer.password = 'Yuzu!2024'
-  customer.profile_image.attach(io: File.open(Rails.root.join('app/assets/images/profile-image_3.png')), filename: 'profile-image_3.png')
+customer = Customer.find_or_create_by!(email: "yuzu@example.com") do |c|
+  c.name = "yuzu sibadog"
+  c.password = 'Yuzu!2024'
 end
+attach_image.call(customer, 'profile-image_3.png')
 
-Customer.find_or_create_by!(email: "tea_tea@example.com") do |customer|
-  customer.name = "🐏茶ちゃ🍭"
-  customer.password = 'TeaTea#2024'
-  customer.profile_image.attach(io: File.open(Rails.root.join('app/assets/images/profile-image_4.png')), filename: 'profile-image_4.png')
-
+customer = Customer.find_or_create_by!(email: "tea_tea@example.com") do |c|
+  c.name = "🐏茶ちゃ🍭"
+  c.password = 'TeaTea#2024'
 end
+attach_image.call(customer, 'profile-image_4.png')
 
-Customer.find_or_create_by!(email: "salmon@example.com") do |customer|
-  customer.name = "salmon"
-  customer.password = 'Salmon2024%'
-  customer.profile_image.attach(io: File.open(Rails.root.join('app/assets/images/profile-image_5.png')), filename: 'profile-image_5.png')
+customer = Customer.find_or_create_by!(email: "salmon@example.com") do |c|
+  c.name = "salmon"
+  c.password = 'Salmon2024%'
 end
+attach_image.call(customer, 'profile-image_5.png')
 
-Customer.find_or_create_by!(email: "july@example.com") do |customer|
-  customer.name = "july🎐"
-  customer.password = 'July2024!'
-  customer.profile_image.attach(io: File.open(Rails.root.join('app/assets/images/profile-image_6.png')), filename: 'profile-image_6.png')
+customer = Customer.find_or_create_by!(email: "july@example.com") do |c|
+  c.name = "july🎐"
+  c.password = 'July2024!'
 end
+attach_image.call(customer, 'profile-image_6.png')
 
-Customer.find_or_create_by!(email: "hutaba@example.com") do |customer|
-  customer.name = "ふたばクラブ公式✅"
-  customer.password = 'hutaba#2024'
-  customer.profile_image.attach(io: File.open(Rails.root.join('app/assets/images/profile-image_7.png')), filename: 'profile-image_7.png')
+customer = Customer.find_or_create_by!(email: "hutaba@example.com") do |c|
+  c.name = "ふたばクラブ公式✅"
+  c.password = 'hutaba#2024'
 end
+attach_image.call(customer, 'profile-image_7.png')
 
-Customer.find_or_create_by!(email: "spica@example.com") do |customer|
-  customer.name = "★spica"
-  customer.password = 'Spica2024$'
-  customer.profile_image.attach(io: File.open(Rails.root.join('app/assets/images/profile-image_8.png')), filename: 'profile-image_8.png')
+customer = Customer.find_or_create_by!(email: "spica@example.com") do |c|
+  c.name = "★spica"
+  c.password = 'Spica2024$'
 end
+attach_image.call(customer, 'profile-image_8.png')
 
-Customer.find_or_create_by!(email: "everyday@example.com") do |customer|
-  customer.name = "エブリデイ学童"
-  customer.password = 'everyday2024!'
-  customer.profile_image.attach(io: File.open(Rails.root.join('app/assets/images/profile-image_9.png')), filename: 'profile-image_9.png')
+customer = Customer.find_or_create_by!(email: "everyday@example.com") do |c|
+  c.name = "エブリデイ学童"
+  c.password = 'everyday2024!'
 end
+attach_image.call(customer, 'profile-image_9.png')
 
-Customer.find_or_create_by!(email: "gokigen@example.com") do |customer|
-  customer.name = "ごきげんボンバー💣"
-  customer.password = 'Gokigen2024'
-  customer.profile_image.attach(io: File.open(Rails.root.join('app/assets/images/profile-image_10.png')), filename: 'profile-image_10.png')
+customer = Customer.find_or_create_by!(email: "gokigen@example.com") do |c|
+  c.name = "ごきげんボンバー💣"
+  c.password = 'Gokigen2024'
 end
+attach_image.call(customer, 'profile-image_10.png')
 
 # ジャンルの作成
 アイディア = Genre.find_or_create_by!(name: "アイディア") do |genre|
