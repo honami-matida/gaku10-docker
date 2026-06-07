@@ -6,4 +6,14 @@
 table td {
   word-break : break-all;
   vertical-align: middle;
+
+  a {
+    color: #1c355f;
+    text-decoration: none;
+
+    &:hover {
+      color: #1c355f;
+      text-decoration: underline;
+    }
+  }
 }

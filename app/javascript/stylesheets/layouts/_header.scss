@@ -20,6 +20,16 @@
   color: black;
 }
 
+a.header-btn-fill{
+  color: #1c355f;
+
+  &:hover {
+    color: #1c355f;
+    text-decoration: underline;
+    text-decoration-color: #1c355f;
+  }
+}
+
 .header-btn-fill1{
   display: block;
   text-align: center;
