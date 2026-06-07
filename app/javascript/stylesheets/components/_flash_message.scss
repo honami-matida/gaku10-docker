@@ -11,7 +11,12 @@
   pointer-events: none; /* クリックを邪魔しない */
 }
 
-.flash-message.notice {
+.flash-message.notice,
+.flash-message.alert {
+  position: fixed;
+  top: 70px;
+  left: 20px;
+  z-index: 2000;
   background: #e1f5ff;
   color: #0077aa;
   border: 1px solid #8bd7f7;
@@ -19,11 +24,18 @@
   padding: 10px 20px;
   display: inline-block;
   font-weight: bold;
-  animation: slideDown 0.45s ease-out;
+  white-space: nowrap;
+  animation: slideDown 0.45s ease-out, fadeOut 0.5s ease-in 3s forwards;
 }
 
 /* スライドで降りてくるアニメーション */
 @keyframes slideDown {
   0%   { opacity: 0; transform: translateY(-10px); }
   20%  { opacity: 1; transform: translateY(0); }
+}
+
+/* 3秒後にフェードアウト */
+@keyframes fadeOut {
+  0%   { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; pointer-events: none; }
 }
